@@ -6,16 +6,25 @@
   --font-sans: var(--font-inter);
   --font-display: var(--font-outfit);
   
-  --color-zivox-bg: #0a0a0f;
-  --color-zivox-card: rgba(255, 255, 255, 0.05);
+  --color-zivox-bg: var(--zivox-bg);
+  --color-zivox-card: var(--zivox-card);
   --color-zivox-gold: #fbbf24;
   --color-zivox-violet: #8b5cf6;
   --color-zivox-cyan: #22d3ee;
 }
 
 :root {
+  --background: #f8f9fa;
+  --foreground: #111827;
+  --zivox-bg: #f8f9fa;
+  --zivox-card: rgba(0, 0, 0, 0.05);
+}
+
+.dark {
   --background: #0a0a0f;
   --foreground: #ffffff;
+  --zivox-bg: #0a0a0f;
+  --zivox-card: rgba(255, 255, 255, 0.05);
 }
 
 body {
@@ -34,6 +43,11 @@ body {
   background: var(--color-zivox-card);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(128, 128, 128, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+}
+
+.dark .glass-card {
   border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
 }

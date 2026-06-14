@@ -17,8 +17,15 @@ export default function PosterCard({ item, type }: PosterCardProps) {
   const year = rawDate ? rawDate.split('-')[0] : '2024';
   const rating = item.vote_average ? item.vote_average.toFixed(1) : '8.0';
 
+  const generateSlug = (id: number, rawTitle: string) => {
+    const safeTitle = rawTitle.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
+    return `${id}-${safeTitle}`;
+  };
+
+  const slug = generateSlug(item.id, title || 'unknown');
+
   return (
-    <Link href={`/${type}/${item.id}`}>
+    <Link href={`/${type}/${slug}`}>
       <motion.div 
         whileHover={{ scale: 1.05, y: -5 }}
         className="relative flex-none w-36 sm:w-44 md:w-56 aspect-[2/3] rounded-xl overflow-hidden cursor-pointer group shadow-lg snap-center bg-zinc-900"
@@ -32,13 +39,13 @@ export default function PosterCard({ item, type }: PosterCardProps) {
             className="object-cover transition-opacity duration-300 group-hover:opacity-60"
           />
         ) : (
-          <div className="w-full h-full flex items-center justify-center bg-zinc-800 text-center p-2 text-sm text-white/50">
+          <div className="w-full h-full flex items-center justify-center bg-zinc-800 text-center p-2 text-sm text-foreground/50">
             {title}
           </div>
         )}
 
         <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
-          <div className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/20 text-white shadow-xl shadow-black/50">
+          <div className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/20 text-foreground shadow-xl shadow-black/50">
             <Play className="w-6 h-6 ml-1 fill-white" />
           </div>
         </div>

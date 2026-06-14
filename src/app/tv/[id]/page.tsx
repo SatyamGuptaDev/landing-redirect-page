@@ -11,7 +11,8 @@ interface Props {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const resolvedParams = await params;
-  const tv = await fetchDetails(resolvedParams.id, 'tv');
+  const tmdbId = resolvedParams.id.split('-')[0];
+  const tv = await fetchDetails(tmdbId, 'tv');
   
   if (!tv) return { title: 'Not Found' };
   
@@ -38,7 +39,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function TVPage({ params }: Props) {
   const resolvedParams = await params;
-  const tv = await fetchDetails(resolvedParams.id, 'tv');
+  const tmdbId = resolvedParams.id.split('-')[0];
+  const tv = await fetchDetails(tmdbId, 'tv');
 
   if (!tv) {
     notFound();
@@ -90,23 +92,23 @@ export default async function TVPage({ params }: Props) {
                   </span>
                 ))}
               </div>
-              <h1 className="text-4xl md:text-5xl lg:text-7xl font-display font-bold text-white mb-4 drop-shadow-lg">
+              <h1 className="text-4xl md:text-5xl lg:text-7xl font-display font-bold text-foreground mb-4 drop-shadow-lg">
                 {tv.name}
               </h1>
-              <div className="flex flex-wrap items-center gap-4 text-sm md:text-base text-white/80 mb-6">
+              <div className="flex flex-wrap items-center gap-4 text-sm md:text-base text-foreground/80 mb-6">
                 <span className="flex items-center gap-1 text-zivox-gold font-bold">
                   ⭐ {tv.vote_average?.toFixed(1)}
                 </span>
-                <span>•</span>
+                <span className="text-foreground/50">•</span>
                 <span>{year}</span>
                 {tv.number_of_seasons && (
                   <>
-                    <span>•</span>
+                    <span className="text-foreground/50">•</span>
                     <span>{tv.number_of_seasons} Season{tv.number_of_seasons > 1 ? 's' : ''}</span>
                   </>
                 )}
               </div>
-              <p className="max-w-3xl text-white/70 text-sm md:text-base leading-relaxed mb-8 drop-shadow-md">
+              <p className="max-w-3xl text-foreground/70 text-sm md:text-base leading-relaxed mb-8 drop-shadow-md">
                 {tv.overview}
               </p>
 
@@ -137,11 +139,11 @@ export default async function TVPage({ params }: Props) {
       {/* Cast Section */}
       {cast.length > 0 && (
         <div className="max-w-7xl mx-auto px-6 md:px-12 mt-16">
-          <h2 className="text-2xl font-display font-bold text-white/90 mb-6">Top Cast</h2>
+          <h2 className="text-2xl font-display font-bold text-foreground/90 mb-6">Top Cast</h2>
           <div className="flex overflow-x-auto gap-4 pb-8 hide-scrollbar snap-x-mandatory">
             {cast.map(actor => (
               <div key={actor.id} className="flex-none w-32 md:w-40 snap-start">
-                <div className="relative w-full aspect-[2/3] rounded-xl overflow-hidden mb-3 bg-zinc-900 border border-white/5">
+                <div className="relative w-full aspect-[2/3] rounded-xl overflow-hidden mb-3 bg-zinc-900 border border-black/5 dark:border-white/5 shadow-md">
                   {actor.profile_path ? (
                     <Image
                       src={`https://image.tmdb.org/t/p/w300${actor.profile_path}`}
@@ -153,8 +155,8 @@ export default async function TVPage({ params }: Props) {
                     <div className="w-full h-full flex items-center justify-center text-white/30 text-xs text-center p-2">No Image</div>
                   )}
                 </div>
-                <h4 className="font-medium text-white text-sm truncate">{actor.name}</h4>
-                <p className="text-xs text-white/50 truncate">{actor.character}</p>
+                <h4 className="font-medium text-foreground text-sm truncate">{actor.name}</h4>
+                <p className="text-xs text-foreground/50 truncate">{actor.character}</p>
               </div>
             ))}
           </div>
