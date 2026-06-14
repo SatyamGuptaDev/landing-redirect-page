@@ -219,8 +219,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
             card.innerHTML = `
                 ${imageHTML}
+                <div class="play-btn-overlay">▶</div>
                 <div class="poster-info-overlay">
-                    <div class="play-btn-overlay">▶</div>
                     <div class="poster-text-content">
                         <h3 class="poster-title">${title}</h3>
                         <div class="poster-meta">
