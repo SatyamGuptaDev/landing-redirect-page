@@ -19,15 +19,19 @@
 }
 
 [data-theme="light"] {
-    --bg-base: #FAFAFA;
-    --text-main: #0a0a0f;
-    --text-muted: #71717A;
-    --accent: #D97706;
-    --accent-bg: rgba(217, 119, 6, 0.1);
-    --border-color: rgba(0, 0, 0, 0.05);
-    --border-hover: rgba(0, 0, 0, 0.1);
-    --pill-bg: rgba(0, 0, 0, 0.03);
-    --pill-hover: rgba(0, 0, 0, 0.06);
+    /* Refined Light Theme */
+    --bg-main: #f7f7f9;
+    --bg-surface: #ffffff;
+    --pill-bg: rgba(0, 0, 0, 0.04);
+    --pill-bg-hover: rgba(0, 0, 0, 0.08);
+    --border-color: rgba(0, 0, 0, 0.08);
+    --border-hover: rgba(0, 0, 0, 0.2);
+    
+    --text-main: #111118;
+    --text-muted: #5e5e66;
+    --accent: #2563eb;
+    
+    --glow-color: rgba(37, 99, 235, 0.15);
     --btn-bg: #0a0a0f;
     --btn-text: #FFFFFF;
     --btn-hover: #27272A;
@@ -39,24 +43,28 @@
 }
 
 * {
-    box-sizing: border-box;
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 body {
-    background-color: var(--bg-base);
-    color: var(--text-main);
     font-family: 'Inter', -apple-system, sans-serif;
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    line-height: 1.6;
+    overflow-x: hidden;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    overflow-x: hidden;
-    position: relative;
-    -webkit-font-smoothing: antialiased;
     transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+h1, h2, h3, h4 {
+    font-family: 'Outfit', sans-serif;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
 }
 
 /* Hide default cursor on desktop */
@@ -187,7 +195,7 @@ body {
 }
 
 .theme-toggle:hover {
-    background: var(--pill-hover);
+    background: var(--pill-bg-hover);
     border-color: var(--border-hover);
     transform: scale(1.05);
 }
@@ -367,9 +375,9 @@ body {
     letter-spacing: 0.15em;
     padding: 0.4rem 0.8rem;
     border-radius: 100px;
-    background: var(--accent-bg);
+    background: var(--pill-bg);
     color: var(--accent);
-    border: 1px solid var(--accent-bg);
+    border: 1px solid var(--pill-bg);
     transition: all 0.5s ease;
 }
 
@@ -380,8 +388,8 @@ body {
     font-weight: 700;
     line-height: 1.1;
     letter-spacing: -0.02em;
-    padding-bottom: 0.15em; /* Fix for descenders like 'g' getting cut off */
-    margin-bottom: 1.35rem; /* Adjusted to balance the added padding */
+    padding-bottom: 0.15em;
+    margin-bottom: 1.35rem;
     background: linear-gradient(to right, #FFFFFF, #A1A1AA, #FFFFFF);
     background-size: 200% auto;
     -webkit-background-clip: text;
@@ -445,7 +453,7 @@ body {
 
 .domain-pill:hover {
     border-color: var(--border-hover);
-    background: var(--pill-hover);
+    background: var(--pill-bg-hover);
 }
 
 .domain-text {
@@ -476,7 +484,7 @@ body {
 }
 
 .copy-btn:hover {
-    background: var(--pill-hover);
+    background: var(--pill-bg-hover);
     transform: scale(1.05);
 }
 
@@ -605,7 +613,7 @@ body {
 
 .feature-card:hover {
     border-color: var(--border-hover);
-    background: var(--pill-hover);
+    background: var(--pill-bg-hover);
     transform: translateY(-5px);
     box-shadow: 0 15px 35px rgba(0,0,0,0.2);
 }
@@ -704,31 +712,31 @@ body {
     background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.02) 50%, transparent 100%);
 }
 
-.trending-title {
-    font-family: 'Outfit', sans-serif;
-    font-size: 1.25rem;
-    font-weight: 500;
-    color: var(--text-muted);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    margin-bottom: 2rem;
-}
-
-/* Horizontal Snap Carousel */
+/* --- ULTRA PREMIUM CAROUSEL & CARDS --- */
 .carousel-header {
     display: flex;
     align-items: center;
     gap: 1rem;
-    padding: 0 2rem;
-    margin-bottom: 1rem;
+    padding: 0 4vw;
+    margin-bottom: 1.5rem;
+    max-width: 1600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.trending-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--text-main);
 }
 
 .carousel-badge {
     background: var(--pill-bg);
-    color: var(--accent);
+    color: var(--text-main);
     padding: 0.25rem 0.75rem;
-    border-radius: 99px;
-    font-size: 0.75rem;
+    border-radius: 6px;
+    font-size: 0.7rem;
     font-weight: 700;
     letter-spacing: 0.05em;
     text-transform: uppercase;
@@ -739,187 +747,160 @@ body {
     display: flex;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
-    gap: 1.5rem;
-    padding: 0.5rem 2rem 2rem 2rem;
+    gap: 1.25rem;
+    padding: 0.5rem 4vw 3rem 4vw;
     width: 100vw;
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    scroll-behavior: smooth;
+    max-width: 1600px;
+    margin: 0 auto;
 }
 
 .snap-carousel::-webkit-scrollbar {
     display: none;
 }
 
-.snap-carousel .poster-card {
-    scroll-snap-align: start;
-    flex-direction: column;
-    height: auto;
-    background: transparent;
-    border: none;
-}
-
-.poster-image-wrapper {
-    position: relative;
-    width: 200px;
-    height: 300px;
-    border-radius: 12px;
-    overflow: hidden;
-    border: 1px solid var(--border-color);
-    background: var(--pill-bg);
-    margin-bottom: 0.75rem;
-}
-
-.poster-image-wrapper img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.poster-card:hover .poster-image-wrapper img {
-    transform: scale(1.05);
-}
-
-.poster-info {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-    padding: 0 0.25rem;
-}
-
-.poster-title {
-    font-family: 'Outfit', sans-serif;
-    font-size: 1rem;
-    font-weight: 600;
-    color: var(--text-main);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    margin: 0;
-}
-
-.poster-meta {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.8rem;
-    color: var(--text-muted);
-}
-
-.poster-meta .rating {
-    color: var(--accent);
-    font-weight: 600;
-}
-
-/* Visual Poster Cards */
+/* Premium Poster Card */
 .poster-card {
-    width: 160px;
-    height: 240px;
-    flex-shrink: 0;
+    position: relative;
+    flex: 0 0 160px;
+    aspect-ratio: 2 / 3;
     border-radius: 12px;
     overflow: hidden;
-    position: relative;
-    background: var(--pill-bg);
+    background: var(--bg-surface);
     border: 1px solid var(--border-color);
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    scroll-snap-align: start;
     cursor: pointer;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s ease, border-color 0.4s ease;
+}
+
+@media (min-width: 768px) {
+    .poster-card {
+        flex: 0 0 220px;
+    }
 }
 
 .poster-card img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.5s ease;
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-.poster-fallback {
+.poster-fallback-img {
     width: 100%;
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
+    background: var(--pill-bg);
+    color: var(--text-muted);
+    font-size: 0.9rem;
     text-align: center;
     padding: 1rem;
-    font-weight: 700;
-    font-family: 'Outfit', sans-serif;
-    color: var(--text-main);
-    background: linear-gradient(135deg, #111, #333);
 }
 
-[data-theme="light"] .poster-fallback {
-    background: linear-gradient(135deg, #eee, #ccc);
-}
-
-.poster-overlay {
+/* Text Overlay Gradient */
+.poster-info-overlay {
     position: absolute;
-    inset: 0;
-    background: rgba(0,0,0,0.4);
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 60%;
+    background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.6) 40%, transparent 100%);
     display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 1rem;
+    opacity: 0.9;
     transition: opacity 0.3s ease;
 }
 
-.play-btn-small {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: var(--accent);
-    color: #000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.2rem;
-    padding-left: 4px; /* optical center */
-    transform: scale(0.8);
-    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+[data-theme="light"] .poster-info-overlay {
+    background: linear-gradient(to top, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.7) 40%, transparent 100%);
 }
 
+.poster-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #fff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 0.25rem;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
+[data-theme="light"] .poster-title {
+    color: #000;
+    text-shadow: none;
+}
+
+.poster-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.8);
+    font-weight: 500;
+}
+
+[data-theme="light"] .poster-meta {
+    color: rgba(0,0,0,0.7);
+}
+
+.poster-meta .rating {
+    color: var(--accent);
+    font-weight: 700;
+}
+
+.poster-meta .dot {
+    opacity: 0.5;
+}
+
+/* Hover States */
 .poster-card:hover {
-    transform: translateY(-10px) scale(1.05);
-    z-index: 20;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-    border-color: var(--accent);
+    transform: translateY(-8px) scale(1.03);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    border-color: var(--border-hover);
+    z-index: 10;
 }
 
 .poster-card:hover img {
-    transform: scale(1.1);
+    transform: scale(1.08);
 }
 
-.poster-card:hover .poster-overlay {
+.poster-card:hover .poster-info-overlay {
     opacity: 1;
 }
 
-.poster-card:hover .play-btn-small {
-    transform: scale(1);
+/* Play Button Overlay inside card */
+.play-btn-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -30%) scale(0.8);
+    width: 48px;
+    height: 48px;
+    background: rgba(255,255,255,0.2);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.4);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1rem;
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-.trending-pill {
-    background: var(--pill-bg);
-    border: 1px solid var(--border-color);
-    padding: 0.6rem 1.25rem;
-    border-radius: 100px;
-    font-size: 0.95rem;
-    font-weight: 500;
-    color: var(--text-main);
-    white-space: nowrap;
-    backdrop-filter: blur(10px);
-    transition: all 0.3s ease;
-    cursor: default;
-}
-
-.trending-pill:hover {
-    border-color: var(--border-hover);
-    background: var(--pill-hover);
-    transform: translateY(-2px) scale(1.05);
-    color: var(--accent);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-}
-
-@keyframes scroll {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-100%); }
+.poster-card:hover .play-btn-overlay {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
 }
 
 /* Final CTA */
@@ -932,12 +913,26 @@ body {
     padding: 0 2rem;
 }
 
-.final-cta h2 {
-    font-family: 'Outfit', sans-serif;
-    font-size: clamp(1.5rem, 4vw, 2.5rem);
-    font-weight: 700;
-    text-align: center;
-    color: var(--text-main);
+.final-cta .hero-title {
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 1.05;
+    margin-bottom: 1.5rem;
+    background: linear-gradient(135deg, var(--text-main) 30%, var(--text-muted));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.hero-subtitle {
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+    color: var(--text-muted);
+    max-width: 600px;
+    margin: 0 auto 3rem auto;
+    line-height: 1.5;
+    font-weight: 400;
 }
 
 /* Email Capture */

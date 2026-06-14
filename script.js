@@ -210,32 +210,24 @@ document.addEventListener('DOMContentLoaded', () => {
             card.className = 'poster-card interactable tilt-card';
             card.title = title;
             
-            let posterContent = '';
+            let imageHTML = '';
             if (posterPath) {
-                posterContent = `
-                    <div class="poster-image-wrapper">
-                        <img src="https://image.tmdb.org/t/p/w500${posterPath}" alt="${title}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                        <div class="poster-fallback" style="display:none;">${title}</div>
-                        <div class="poster-overlay"><div class="play-btn-small">▶</div></div>
-                    </div>
-                `;
+                imageHTML = `<img src="https://image.tmdb.org/t/p/w500${posterPath}" alt="${title}" onerror="this.style.display='none';">`;
             } else {
-                posterContent = `
-                    <div class="poster-image-wrapper">
-                        <div class="poster-fallback">${title}</div>
-                        <div class="poster-overlay"><div class="play-btn-small">▶</div></div>
-                    </div>
-                `;
+                imageHTML = `<div class="poster-fallback-img">${title}</div>`;
             }
 
             card.innerHTML = `
-                ${posterContent}
-                <div class="poster-info">
-                    <h3 class="poster-title">${title}</h3>
-                    <div class="poster-meta">
-                        <span class="rating">⭐ ${rating}</span>
-                        <span class="dot">•</span>
-                        <span class="year">${year}</span>
+                ${imageHTML}
+                <div class="poster-info-overlay">
+                    <div class="play-btn-overlay">▶</div>
+                    <div class="poster-text-content">
+                        <h3 class="poster-title">${title}</h3>
+                        <div class="poster-meta">
+                            <span class="rating">⭐ ${rating}</span>
+                            <span class="dot">•</span>
+                            <span class="year">${year}</span>
+                        </div>
                     </div>
                 </div>
             `;
