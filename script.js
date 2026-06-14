@@ -163,54 +163,84 @@ document.addEventListener('DOMContentLoaded', () => {
     const tiltCards = document.querySelectorAll('.tilt-card');
     tiltCards.forEach(applyTilt);
 
-    // ---- Dynamic TMDB API Fetch ----
-    const populateCarousel = async (url, containerId, fallbackText) => {
+    // ---- Dynamic TMDB API Fetch with Premium Fallback Cache ----
+    const fallbackMovies = [
+        { title: 'Dune: Part Two', poster_path: '/1pdfLvkbY9ohJlCjQH2JGqqUT1e.jpg' },
+        { title: 'Deadpool & Wolverine', poster_path: '/8cdWjvZQUExUUTzyp4t6EDMubfO.jpg' },
+        { title: 'Oppenheimer', poster_path: '/8Gxv8gSFCU0XGDykEGv7zR1n2ua.jpg' },
+        { title: 'The Dark Knight', poster_path: '/qJ2tW6WMUDux911r6m7haRef0WH.jpg' },
+        { title: 'Inception', poster_path: '/oYuLEt3zVCKq57qu2F8dT7NIa6f.jpg' },
+        { title: 'Interstellar', poster_path: '/gEU2QlsUUHXjNpeX40VNDbZ0rB8.jpg' },
+        { title: 'Spider-Man: Across the Spider-Verse', poster_path: '/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg' },
+        { title: 'Avatar: The Way of Water', poster_path: '/t6HIqrHezINNdIyFSmYaG01xTay.jpg' }
+    ];
+
+    const fallbackTVShows = [
+        { name: 'Breaking Bad', poster_path: '/ggFHVNu6YYI5L9pCfOacjizRGt.jpg' },
+        { name: 'Stranger Things', poster_path: '/49WJfeN0moxb9IPfGn8m1MgzOzm.jpg' },
+        { name: 'Game of Thrones', poster_path: '/1XS1oqL89opfnbLl8WnZY1O1uJx.jpg' },
+        { name: 'The Boys', poster_path: '/dzOXllMX3R7iX9O9kUjRk5P2X5J.jpg' },
+        { name: 'House of the Dragon', poster_path: '/1X4h40fcBaqcg9cgEVLe3NMTuX.jpg' },
+        { name: 'The Last of Us', poster_path: '/uKvVjHNqB5pSqWaWBsP5Q82PZ2o.jpg' },
+        { name: 'Severance', poster_path: '/zEqyD0SBt6HL7W9JQoWwtd5Do1T.jpg' },
+        { name: 'The Bear', poster_path: '/6gIjuH0Lz32u8bQO8KTwHya0q1m.jpg' }
+    ];
+
+    const renderCards = (container, items, fallbackText) => {
+        container.innerHTML = '';
+        items.slice(0, 15).forEach(item => {
+            const title = item.title || item.name || fallbackText;
+            const posterPath = item.poster_path;
+            
+            const card = document.createElement('div');
+            card.className = 'poster-card interactable tilt-card';
+            card.title = title;
+            
+            if (posterPath) {
+                card.innerHTML = `
+                    <img src="https://image.tmdb.org/t/p/w500${posterPath}" alt="${title}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="poster-fallback" style="display:none;">${title}</div>
+                    <div class="poster-overlay"><div class="play-btn-small">▶</div></div>
+                `;
+            } else {
+                card.innerHTML = `
+                    <div class="poster-fallback">${title}</div>
+                    <div class="poster-overlay"><div class="play-btn-small">▶</div></div>
+                `;
+            }
+            
+            card.addEventListener('click', () => handleRedirect(card));
+            container.appendChild(card);
+            applyTilt(card);
+        });
+    };
+
+    const populateCarousel = async (url, containerId, fallbackText, fallbackData) => {
         const container = document.getElementById(containerId);
         if (!container) return;
 
+        // Set a timeout to abort fetch if it takes too long
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 4000);
+
         try {
-            const res = await fetch(url);
+            const res = await fetch(url, { signal: controller.signal });
+            clearTimeout(timeoutId);
             const data = await res.json();
             
             if (data && data.results && data.results.length > 0) {
-                container.innerHTML = ''; // Clear loading
-                
-                data.results.slice(0, 15).forEach(item => {
-                    const title = item.title || item.name || fallbackText;
-                    const posterPath = item.poster_path;
-                    
-                    const card = document.createElement('div');
-                    card.className = 'poster-card interactable tilt-card';
-                    card.title = title;
-                    
-                    if (posterPath) {
-                        card.innerHTML = `
-                            <img src="https://image.tmdb.org/t/p/w500${posterPath}" alt="${title}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                            <div class="poster-fallback" style="display:none;">${title}</div>
-                            <div class="poster-overlay"><div class="play-btn-small">▶</div></div>
-                        `;
-                    } else {
-                        card.innerHTML = `
-                            <div class="poster-fallback">${title}</div>
-                            <div class="poster-overlay"><div class="play-btn-small">▶</div></div>
-                        `;
-                    }
-                    
-                    // Click to redirect
-                    card.addEventListener('click', () => handleRedirect(card));
-                    
-                    container.appendChild(card);
-                    applyTilt(card);
-                });
+                renderCards(container, data.results, fallbackText);
+            } else {
+                renderCards(container, fallbackData, fallbackText);
             }
         } catch (error) {
-            console.error('Failed to load TMDB data', error);
-            container.innerHTML = `<div class="poster-card"><div class="poster-fallback">Could not load ${fallbackText}</div></div>`;
+            console.warn(`API unavailable for ${fallbackText}. Falling back to cached premium assets.`);
+            renderCards(container, fallbackData, fallbackText);
         }
     };
 
-    populateCarousel('https://db.videasy.net/3/trending/movie/day', 'moviesCarousel', 'Movie');
-    populateCarousel('https://db.videasy.net/3/trending/tv/day', 'tvCarousel', 'TV Show');
+    populateCarousel('https://db.videasy.net/3/trending/movie/day', 'moviesCarousel', 'Movie', fallbackMovies);
+    populateCarousel('https://db.videasy.net/3/trending/tv/day', 'tvCarousel', 'TV Show', fallbackTVShows);
 
     // ---- Live Counter Logic (Database-less synchronization) ----
     const userCountEl = document.getElementById('userCount');
