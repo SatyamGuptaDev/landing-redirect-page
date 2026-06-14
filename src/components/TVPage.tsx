@@ -108,7 +108,7 @@ export default function TVPage({ id }: { id: string }) {
                 <a 
                   href="https://zivoxtv.live/"
                   target="_blank"
-                  rel="noopener noreferrer"
+                  rel="noopener noreferrer nofollow"
                   className="w-full sm:w-auto flex items-center justify-center gap-2 px-10 py-4 rounded-xl bg-blue-600 hover:bg-blue-500 font-bold text-white shadow-lg shadow-blue-600/30 hover:shadow-blue-600/50 transition-all hover:-translate-y-1"
                 >
                   Watch Free on Zivox

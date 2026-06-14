@@ -69,7 +69,7 @@ export default function HomePage() {
             <a 
               href="https://zivoxtv.live/"
               target="_blank"
-              rel="noopener noreferrer"
+              rel="noopener noreferrer nofollow"
               className="group relative inline-flex items-center justify-center gap-3 px-12 py-5 rounded-2xl bg-white text-black font-bold text-lg transition-all hover:scale-105 will-change-transform shadow-[0_0_40px_rgba(255,255,255,0.15)] hover:shadow-[0_0_60px_rgba(255,255,255,0.3)] overflow-hidden"
             >
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/50 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite]" />
