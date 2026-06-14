@@ -186,6 +186,17 @@ document.addEventListener('DOMContentLoaded', () => {
         { name: 'The Bear', poster_path: '/6gIjuH0Lz32u8bQO8KTwHya0q1m.jpg', vote_average: 8.3, first_air_date: '2022-06-23' }
     ];
 
+    const fallbackHindi = [
+        { title: 'Jawan', poster_path: '/1H8y4a57fU4nBY6v5u6tEqRrKPP.jpg', vote_average: 7.2, release_date: '2023-09-07' },
+        { title: 'Pathaan', poster_path: '/m1ByFn571SS4jSC562qf0S5Xm90.jpg', vote_average: 6.8, release_date: '2023-01-25' },
+        { title: 'RRR', poster_path: '/kdZ79gtElcnUBcr786eAju4Nn6Q.jpg', vote_average: 7.8, release_date: '2022-03-24' },
+        { title: '3 Idiots', poster_path: '/6HN78tP1Vw8E18W93b6YEq28O5m.jpg', vote_average: 8.0, release_date: '2009-12-23' },
+        { title: 'Dangal', poster_path: '/7m3X59rYp9e5bS1rS0Y3R54N96B.jpg', vote_average: 8.0, release_date: '2016-12-21' },
+        { title: 'Sholay', poster_path: '/215h7H403J3aL72n3W65C3q3D5S.jpg', vote_average: 8.2, release_date: '1975-08-15' },
+        { title: 'Sacred Games', name: 'Sacred Games', poster_path: '/i72Xn6w5bS3jNlWkY8a6C3q2D5S.jpg', vote_average: 7.6, first_air_date: '2018-07-06' },
+        { title: 'Mirzapur', name: 'Mirzapur', poster_path: '/7cX4gW5bSm98jO9wY6a7C3q3D5S.jpg', vote_average: 7.9, first_air_date: '2018-11-16' }
+    ];
+
     const fallbackClassics = [
         { title: 'The Godfather', poster_path: '/3bhkrj58Vtu7enYsRolD1fZdja1.jpg', vote_average: 8.7, release_date: '1972-03-14' },
         { title: 'The Shawshank Redemption', poster_path: '/9cqNxxWXNDOBPZXeAcTlsCv02Y4.jpg', vote_average: 8.7, release_date: '1994-09-23' },
@@ -264,6 +275,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     populateCarousel('https://db.videasy.to/3/trending/movie/day', 'moviesCarousel', 'Movie', fallbackMovies);
     populateCarousel('https://db.videasy.to/3/trending/tv/day', 'tvCarousel', 'TV Show', fallbackTVShows);
+    populateCarousel('https://db.videasy.to/3/discover/movie?with_original_language=hi&sort_by=popularity.desc', 'hindiCarousel', 'Hindi Hit', fallbackHindi);
     populateCarousel('https://db.videasy.to/3/movie/top_rated', 'classicsCarousel', 'Classic', fallbackClassics);
 
     // ---- Live Counter Logic (Database-less synchronization) ----

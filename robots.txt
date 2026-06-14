@@ -1,5 +1,3 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://zivoxtv.live/sitemap.xml
-
