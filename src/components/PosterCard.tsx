@@ -2,7 +2,6 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
 import { Play } from 'lucide-react';
 import { TMDBItem } from '@/lib/tmdb';
 
@@ -26,9 +25,8 @@ export default function PosterCard({ item, type }: PosterCardProps) {
 
   return (
     <Link href={`/${type}/${slug}`}>
-      <motion.div 
-        whileHover={{ scale: 1.05, y: -5 }}
-        className="relative flex-none w-36 sm:w-44 md:w-56 aspect-[2/3] rounded-xl overflow-hidden cursor-pointer group shadow-lg snap-center bg-zinc-900"
+      <div 
+        className="relative flex-none w-36 sm:w-44 md:w-56 aspect-[2/3] rounded-xl overflow-hidden cursor-pointer group shadow-lg snap-center bg-zinc-900 transition-all duration-300 ease-out hover:scale-105 hover:-translate-y-1 will-change-transform"
       >
         {item.poster_path ? (
           <Image
@@ -65,7 +63,7 @@ export default function PosterCard({ item, type }: PosterCardProps) {
         
         {/* Glow effect on hover */}
         <div className="absolute inset-0 border border-white/0 group-hover:border-white/20 rounded-xl transition-colors duration-300 z-20 pointer-events-none"></div>
-      </motion.div>
+      </div>
     </Link>
   );
 }

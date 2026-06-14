@@ -4,6 +4,8 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { fetchDetails } from '@/lib/tmdb';
 import { Play } from 'lucide-react';
+import BackButton from '@/components/BackButton';
+import TrailerButton from '@/components/TrailerButton';
 
 interface Props {
   params: Promise<{ id: string }>;
@@ -50,8 +52,32 @@ export default async function MoviePage({ params }: Props) {
   const cast = movie.credits?.cast?.slice(0, 10) || [];
   const year = movie.release_date?.split('-')[0];
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Movie',
+    name: movie.title,
+    image: `https://image.tmdb.org/t/p/w1280${movie.backdrop_path}`,
+    description: movie.overview,
+    dateCreated: movie.release_date,
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: movie.vote_average,
+      bestRating: '10',
+      worstRating: '1',
+    },
+    actor: cast.map(actor => ({
+      '@type': 'Person',
+      name: actor.name,
+    })),
+  };
+
   return (
     <main className="min-h-screen bg-zivox-bg pb-20">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <BackButton />
       {/* Hero Backdrop */}
       <div className="relative w-full h-[60vh] sm:h-[70vh] lg:h-[80vh]">
         <div className="absolute inset-0 bg-gradient-to-t from-zivox-bg via-zivox-bg/60 to-transparent z-10" />
@@ -121,14 +147,7 @@ export default async function MoviePage({ params }: Props) {
                   Watch Free on Zivox
                 </Link>
                 {trailer && (
-                  <a 
-                    href={`https://youtube.com/watch?v=${trailer.key}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 px-8 py-4 rounded-full glass-card hover:bg-white/10 font-medium text-white transition-all"
-                  >
-                    Watch Trailer
-                  </a>
+                  <TrailerButton trailerKey={trailer.key} />
                 )}
               </div>
             </div>

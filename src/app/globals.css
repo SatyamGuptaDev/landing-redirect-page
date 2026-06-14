@@ -14,10 +14,10 @@
 }
 
 :root {
-  --background: #f8f9fa;
+  --background: #fdfdfd;
   --foreground: #111827;
-  --zivox-bg: #f8f9fa;
-  --zivox-card: rgba(0, 0, 0, 0.05);
+  --zivox-bg: #f5f5f7;
+  --zivox-card: rgba(255, 255, 255, 0.7);
 }
 
 .dark {
@@ -41,13 +41,14 @@ body {
 
 .glass-card {
   background: var(--color-zivox-card);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(128, 128, 128, 0.1);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
 }
 
 .dark .glass-card {
+  background: var(--color-zivox-card);
   border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
 }
