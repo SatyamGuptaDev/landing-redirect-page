@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import Link from 'next/link';
 import { fetchTrending, discoverRegional, TMDBResponse } from '@/lib/tmdb';
 import Carousel from '@/components/Carousel';
 
@@ -70,13 +71,13 @@ export default function HomePage() {
               </p>
               
               <div className="flex flex-col sm:flex-row items-center gap-4">
-                <a 
-                  href={`#/movie/${heroMovie.id}-${heroMovie.title?.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '')}`}
+                <Link 
+                  href={`/movie/${heroMovie.id}-${heroMovie.title?.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '')}`}
                   className="w-full sm:w-auto px-10 py-4 rounded-xl bg-foreground text-background font-bold hover:scale-105 transition-transform flex items-center justify-center gap-2 text-lg shadow-xl"
                 >
                   <svg className="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                   Play Now
-                </a>
+                </Link>
                 <a 
                   href="https://zivoxtv.live/"
                   target="_blank"
