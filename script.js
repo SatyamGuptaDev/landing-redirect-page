@@ -221,6 +221,30 @@ document.addEventListener('DOMContentLoaded', () => {
         { title: 'City of God', poster_path: '/k7eYdWvhYQyRQoU233Aqlqf8qT.jpg', vote_average: 8.4, release_date: '2002-08-30' }
     ];
 
+    const fallbackKorean = [
+        { name: 'Squid Game', poster_path: '/dDlEmu3EZ0Pgg93K2SVNlcjCsJI.jpg', vote_average: 7.8, first_air_date: '2021-09-17' },
+        { name: 'All of Us Are Dead', poster_path: '/pTEFqAjLd5YTsMD6NSUxV5D2TXz.jpg', vote_average: 8.3, first_air_date: '2022-01-28' },
+        { name: 'Crash Landing on You', poster_path: '/vHqAenL9vM1L8lH9r1P2aMv2Wc0.jpg', vote_average: 8.7, first_air_date: '2019-12-14' },
+        { title: 'Parasite', poster_path: '/7IiVWcChQWqWGPqC1yUr298E2k4.jpg', vote_average: 8.5, release_date: '2019-05-30' },
+        { title: 'Train to Busan', poster_path: '/1aomvKOLXkIB1X5Bw0jU4155a5b.jpg', vote_average: 7.8, release_date: '2016-07-20' }
+    ];
+
+    const fallbackAnime = [
+        { name: 'Attack on Titan', poster_path: '/hTP1DtLWHlNIGhXQ06XJb419Hdb.jpg', vote_average: 8.6, first_air_date: '2013-04-07' },
+        { name: 'Demon Slayer', poster_path: '/xUfRZu2mi8jH6SnDTRVDpWtzIic.jpg', vote_average: 8.4, first_air_date: '2019-04-06' },
+        { name: 'Jujutsu Kaisen', poster_path: '/hK0sB5pM9g4I0eK1LwKk8KjLgN.jpg', vote_average: 8.5, first_air_date: '2020-10-03' },
+        { name: 'Naruto Shippuden', poster_path: '/zAYRe2bJxpWTVrwwmBc00VFkAf4.jpg', vote_average: 8.6, first_air_date: '2007-02-15' },
+        { name: 'One Piece', poster_path: '/e3NBGiAifW9ScO8D7C8I6q1I5n3.jpg', vote_average: 8.7, first_air_date: '1999-10-20' }
+    ];
+
+    const fallbackSpanish = [
+        { name: 'Money Heist', poster_path: '/reEMJA1uzscCbkpeRJeTMCi2B5Z.jpg', vote_average: 8.2, first_air_date: '2017-05-02' },
+        { name: 'Elite', poster_path: '/3NTAbAiaoCEJUeqzpeVN8DIFD1N.jpg', vote_average: 8.1, first_air_date: '2018-10-05' },
+        { title: 'Society of the Snow', poster_path: '/9b2p0S0h0BqZ1wX7Q4D4cO1J9dZ.jpg', vote_average: 8.0, release_date: '2023-12-14' },
+        { title: 'The Platform', poster_path: '/8ZX18BEEpA93XGjJbY2C1a9TpJ.jpg', vote_average: 7.0, release_date: '2019-11-08' },
+        { title: 'Pan\'s Labyrinth', poster_path: '/AXXiT0R4gE7vB7tWj6f9B2QpE5V.jpg', vote_average: 7.8, release_date: '2006-10-11' }
+    ];
+
     const renderCards = (container, items, fallbackText) => {
         container.innerHTML = '';
         items.slice(0, 15).forEach(item => {
@@ -311,6 +335,9 @@ document.addEventListener('DOMContentLoaded', () => {
     populateCarousel('https://db.videasy.to/3/trending/tv/day', 'tvCarousel', 'TV Show', fallbackTVShows);
     populateCarousel('https://db.videasy.to/3/discover/movie?with_original_language=hi&sort_by=popularity.desc', 'hindiCarousel', 'Hindi Hit', fallbackHindi);
     populateCarousel('https://db.videasy.to/3/movie/top_rated', 'classicsCarousel', 'Classic', fallbackClassics);
+    populateCarousel('https://db.videasy.to/3/discover/tv?with_original_language=ko&sort_by=popularity.desc', 'koreanCarousel', 'Korean Hit', fallbackKorean);
+    populateCarousel('https://db.videasy.to/3/discover/tv?with_original_language=ja&with_genres=16&sort_by=popularity.desc', 'animeCarousel', 'Anime', fallbackAnime);
+    populateCarousel('https://db.videasy.to/3/discover/movie?with_original_language=es&sort_by=popularity.desc', 'spanishCarousel', 'Spanish Hit', fallbackSpanish);
 
     // ---- Live Counter Logic (Database-less synchronization) ----
     const userCountEl = document.getElementById('userCount');
