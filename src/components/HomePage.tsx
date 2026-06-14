@@ -33,64 +33,34 @@ export default function HomePage() {
 
   return (
     <main className="min-h-screen bg-zivox-bg pb-20">
-      {/* Dynamic Netflix-style Hero Section */}
-      <div className="relative w-full h-[75vh] sm:h-[85vh] lg:h-[95vh] flex flex-col justify-end pb-20 px-6 md:px-12 overflow-hidden">
-        {/* Backdrop Image */}
-        {heroMovie?.backdrop_path && (
-          <div className="absolute inset-0 z-0">
-            <img 
-              src={`https://image.tmdb.org/t/p/original${heroMovie.backdrop_path}`}
-              alt={heroMovie.title}
-              className="w-full h-full object-cover opacity-90 dark:opacity-70"
-            />
-          </div>
-        )}
+      {/* Static Hero Section (SEO & Redirect Focus) */}
+      <div className="relative w-full min-h-[50vh] md:h-[60vh] flex flex-col items-center justify-center text-center px-4 overflow-hidden py-12 md:py-0 mt-8">
+        <div className="absolute inset-0 bg-gradient-to-b from-zivox-violet/10 via-zivox-bg to-zivox-bg z-0 pointer-events-none" />
         
-        {/* Advanced Gradient Masks */}
-        <div className="absolute inset-0 bg-gradient-to-t from-zivox-bg via-zivox-bg/80 to-transparent z-10" />
-        <div className="absolute inset-0 bg-gradient-to-r from-zivox-bg via-zivox-bg/60 to-transparent z-10 hidden sm:block" />
-        <div className="absolute inset-0 bg-black/20 z-[5]" />
+        <div className="relative z-10 space-y-6 max-w-4xl animate-in fade-in slide-in-from-bottom-8 duration-1000">
+          <h1 className="text-4xl sm:text-5xl md:text-7xl font-display font-bold text-foreground tracking-tight drop-shadow-lg leading-tight">
+            Your Free Streaming <br className="hidden sm:block" /> Era Begins.
+          </h1>
+          
+          <p className="text-lg md:text-xl text-foreground/80 max-w-2xl mx-auto font-medium leading-relaxed">
+            Zivox has evolved. The cinematic universe is now ad-free, uninterrupted, and better than ever. Unlock your premium pass to infinite entertainment below.
+          </p>
 
-        {/* Hero Content */}
-        <div className="relative z-20 max-w-4xl animate-in fade-in slide-in-from-bottom-8 duration-1000 mt-auto">
-          {heroMovie ? (
-            <>
-              <div className="flex items-center gap-3 mb-4">
-                <span className="px-3 py-1 bg-red-600 text-white text-xs font-bold tracking-widest uppercase rounded">
-                  #1 Trending
-                </span>
-                <span className="text-zivox-gold font-bold text-sm">
-                  ⭐ {heroMovie.vote_average?.toFixed(1)}
-                </span>
-              </div>
-              <h1 className="text-5xl sm:text-6xl md:text-8xl font-display font-black text-foreground tracking-tighter drop-shadow-2xl leading-none mb-6">
-                {heroMovie.title}
-              </h1>
-              <p className="text-sm md:text-lg text-foreground/80 max-w-2xl font-medium leading-relaxed drop-shadow-md mb-8 line-clamp-3">
-                {heroMovie.overview}
-              </p>
-              
-              <div className="flex flex-col sm:flex-row items-center gap-4">
-                <Link 
-                  href={`/movie/${heroMovie.id}-${heroMovie.title?.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '')}`}
-                  className="w-full sm:w-auto px-10 py-4 rounded-xl bg-foreground text-background font-bold hover:scale-105 transition-transform flex items-center justify-center gap-2 text-lg shadow-xl"
-                >
-                  <svg className="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                  Play Now
-                </Link>
-                <a 
-                  href="https://zivoxtv.live/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full sm:w-auto px-10 py-4 rounded-xl bg-white/10 hover:bg-white/20 text-foreground font-bold backdrop-blur-md transition-colors flex items-center justify-center shadow-lg border border-white/10"
-                >
-                  Enter ZivoxTV
-                </a>
-              </div>
-            </>
-          ) : (
-            <div className="text-foreground/50 animate-pulse">Loading Cinematic Universe...</div>
-          )}
+          <div className="pt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+            <div className="flex items-center gap-3 px-6 py-4 rounded-full bg-white/5 dark:bg-white/10 border border-foreground/10 shadow-xl text-foreground/90 font-mono text-sm">
+              <span className="opacity-50">https://</span>
+              <span className="font-bold text-foreground">zivoxtv.live</span>
+            </div>
+            
+            <a 
+              href="https://zivoxtv.live/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-10 py-4 rounded-full bg-blue-600 hover:bg-blue-500 text-white font-bold transition-all shadow-lg shadow-blue-600/30 hover:shadow-blue-600/50 hover:-translate-y-1"
+            >
+              Enter ZivoxTV Now
+            </a>
+          </div>
         </div>
       </div>
 
