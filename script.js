@@ -266,6 +266,22 @@ document.addEventListener('DOMContentLoaded', () => {
         const container = document.getElementById(containerId);
         if (!container) return;
 
+        // Check localStorage Cache (cache for 1 hour = 3600000 ms)
+        const cacheKey = `zivox_cache_${containerId}`;
+        const cached = localStorage.getItem(cacheKey);
+        if (cached) {
+            try {
+                const parsed = JSON.parse(cached);
+                const isFresh = (Date.now() - parsed.timestamp) < 3600000;
+                if (isFresh && parsed.data && parsed.data.length > 0) {
+                    renderCards(container, parsed.data, fallbackText);
+                    return;
+                }
+            } catch (e) {
+                localStorage.removeItem(cacheKey);
+            }
+        }
+
         // Set a timeout to abort fetch if it takes too long
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), 4000);
@@ -277,6 +293,11 @@ document.addEventListener('DOMContentLoaded', () => {
             
             if (data && data.results && data.results.length > 0) {
                 renderCards(container, data.results, fallbackText);
+                // Save to cache
+                localStorage.setItem(cacheKey, JSON.stringify({
+                    timestamp: Date.now(),
+                    data: data.results
+                }));
             } else {
                 renderCards(container, fallbackData, fallbackText);
             }
