@@ -696,7 +696,7 @@ body {
     padding-right: 1.5rem;
 }
 
-.trending-marquee:hover {
+.trending-marquee-container:hover .trending-marquee {
     animation-play-state: paused;
 }
 

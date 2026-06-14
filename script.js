@@ -163,16 +163,28 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // ---- Live Counter Logic ----
+    // ---- Live Counter Logic (Database-less synchronization) ----
     const userCountEl = document.getElementById('userCount');
     if (userCountEl) {
-        let currentCount = 14204;
-        setInterval(() => {
-            // Fluctuate by -2 to +5 randomly
-            const change = Math.floor(Math.random() * 8) - 2;
-            currentCount += change;
+        const updateCounter = () => {
+            const now = Date.now();
+            const baseCount = 14204;
+            
+            // Generate continuous synchronized waves based on universal time
+            // Slow wave: peaks every hour
+            const slowWave = Math.sin(now / (3600000 / (2 * Math.PI))) * 800;
+            // Medium wave: peaks every 5 minutes
+            const mediumWave = Math.sin(now / (300000 / (2 * Math.PI))) * 150;
+            // Fast wave: peaks every 15 seconds
+            const fastWave = Math.sin(now / (15000 / (2 * Math.PI))) * 25;
+            
+            const currentCount = Math.floor(baseCount + slowWave + mediumWave + fastWave);
             userCountEl.textContent = currentCount.toLocaleString();
-        }, 3500);
+        };
+        
+        updateCounter();
+        // Update every 3 seconds
+        setInterval(updateCounter, 3000);
     }
 
     // ---- Email Capture Logic ----
