@@ -1,4 +1,49 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // ---- Theme Toggle Logic ----
+    const themeToggle = document.getElementById('themeToggle');
+    const iconSun = document.querySelector('.icon-sun');
+    const iconMoon = document.querySelector('.icon-moon');
+    
+    // Check local storage or system preference
+    let savedTheme = localStorage.getItem('zivox-theme');
+    
+    // Default to light if no saved theme
+    if (!savedTheme) {
+        savedTheme = 'light';
+        localStorage.setItem('zivox-theme', 'light');
+    }
+    
+    if (savedTheme === 'light') {
+        document.documentElement.setAttribute('data-theme', 'light');
+        iconSun.classList.add('hidden');
+        iconMoon.classList.remove('hidden');
+    } else {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        iconMoon.classList.add('hidden');
+        iconSun.classList.remove('hidden');
+    }
+
+    themeToggle.addEventListener('click', () => {
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+        
+        document.documentElement.setAttribute('data-theme', newTheme);
+        localStorage.setItem('zivox-theme', newTheme);
+        
+        // Rotate animation on SVG for a cool effect
+        themeToggle.querySelector('svg:not(.hidden)').style.transform = 'rotate(180deg)';
+        
+        setTimeout(() => {
+            if (newTheme === 'light') {
+                iconSun.classList.add('hidden');
+                iconMoon.classList.remove('hidden');
+            } else {
+                iconMoon.classList.add('hidden');
+                iconSun.classList.remove('hidden');
+            }
+            themeToggle.querySelectorAll('svg').forEach(svg => svg.style.transform = 'rotate(0deg)');
+        }, 150);
+    });
 
     // ---- Smooth Interactive Mouse Logic ----
     const cursorDot = document.getElementById('cursor-dot');
@@ -95,9 +140,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ---- 3D Tilt Effect ----
-    const tiltCards = document.querySelectorAll('.tilt-card');
-    
-    tiltCards.forEach(card => {
+    const applyTilt = (card) => {
         card.addEventListener('mousemove', (e) => {
             const rect = card.getBoundingClientRect();
             const x = e.clientX - rect.left;
@@ -106,7 +149,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const centerX = rect.width / 2;
             const centerY = rect.height / 2;
             
-            // Calculate rotation (max 10 degrees)
             const rotateX = ((y - centerY) / centerY) * -10;
             const rotateY = ((x - centerX) / centerX) * 10;
             
@@ -116,7 +158,59 @@ document.addEventListener('DOMContentLoaded', () => {
         card.addEventListener('mouseleave', () => {
             card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
         });
-    });
+    };
+
+    const tiltCards = document.querySelectorAll('.tilt-card');
+    tiltCards.forEach(applyTilt);
+
+    // ---- Dynamic TMDB API Fetch ----
+    const populateCarousel = async (url, containerId, fallbackText) => {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+
+        try {
+            const res = await fetch(url);
+            const data = await res.json();
+            
+            if (data && data.results && data.results.length > 0) {
+                container.innerHTML = ''; // Clear loading
+                
+                data.results.slice(0, 15).forEach(item => {
+                    const title = item.title || item.name || fallbackText;
+                    const posterPath = item.poster_path;
+                    
+                    const card = document.createElement('div');
+                    card.className = 'poster-card interactable tilt-card';
+                    card.title = title;
+                    
+                    if (posterPath) {
+                        card.innerHTML = `
+                            <img src="https://image.tmdb.org/t/p/w500${posterPath}" alt="${title}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="poster-fallback" style="display:none;">${title}</div>
+                            <div class="poster-overlay"><div class="play-btn-small">▶</div></div>
+                        `;
+                    } else {
+                        card.innerHTML = `
+                            <div class="poster-fallback">${title}</div>
+                            <div class="poster-overlay"><div class="play-btn-small">▶</div></div>
+                        `;
+                    }
+                    
+                    // Click to redirect
+                    card.addEventListener('click', () => handleRedirect(card));
+                    
+                    container.appendChild(card);
+                    applyTilt(card);
+                });
+            }
+        } catch (error) {
+            console.error('Failed to load TMDB data', error);
+            container.innerHTML = `<div class="poster-card"><div class="poster-fallback">Could not load ${fallbackText}</div></div>`;
+        }
+    };
+
+    populateCarousel('https://db.videasy.net/3/trending/movie/day', 'moviesCarousel', 'Movie');
+    populateCarousel('https://db.videasy.net/3/trending/tv/day', 'tvCarousel', 'TV Show');
 
     // ---- Live Counter Logic (Database-less synchronization) ----
     const userCountEl = document.getElementById('userCount');

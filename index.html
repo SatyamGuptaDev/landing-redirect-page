@@ -52,13 +52,51 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Background Effects -->
-    <div class="mouse-dot" id="mouseDot"></div>
-    <div class="mouse-blob" id="mouseBlob"></div>
+    <!-- Interactive Mouse Elements -->
+    <div id="cursor-dot" class="mouse-dot"></div>
+    <div id="cursor-blob" class="mouse-blob"></div>
+
     <div class="noise"></div>
     <div class="ambient-light"></div>
 
+    <!-- Sticky Navbar -->
+    <nav class="sticky-nav">
+        <a href="#" class="nav-logo interactable">
+            <span class="logo-ziv">ZIV</span>
+            <span class="logo-play-o">
+                <svg class="logo-play-icon" viewBox="0 0 24 24" fill="url(#playGrad)" stroke="none">
+                    <defs>
+                        <linearGradient id="playGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#4285f4" />
+                            <stop offset="100%" stop-color="#1E60FF" />
+                        </linearGradient>
+                    </defs>
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z" />
+                </svg>
+            </span>
+            <span class="logo-x">X</span>
+        </a>
+        <div class="nav-actions">
+            <!-- Live Counter -->
+            <div class="live-counter interactable">
+                <span class="pulse-dot"></span>
+                <span id="userCount">14,204</span> streaming now
+            </div>
+            <!-- Theme Toggle -->
+            <button id="themeToggle" class="theme-toggle interactable" aria-label="Toggle theme">
+                <svg class="icon-sun hidden" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+            </button>
+        </div>
+    </nav>
+
     <main class="content-wrapper">
+        <div class="fade-in-stagger">
+            <div class="logo-container">
+                <span class="logo-text interactable">
+                    <span class="logo-ziv">ZIV</span>
+                    <span class="logo-play-o">
+                        <svg class="logo-play-icon" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <circle cx="50" cy="50" r="38" stroke="url(#blue-gradient)" stroke-width="9" />
                             <polygon points="43,31 71,50 43,69" fill="url(#play-gradient)" />
                             <defs>
@@ -118,23 +156,17 @@
         </div>
         <div class="features-grid">
             <div class="feature-card tilt-card">
-                <div class="feature-icon">
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--accent);"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect><line x1="7" y1="2" x2="7" y2="22"></line><line x1="17" y1="2" x2="17" y2="22"></line><line x1="2" y1="12" x2="22" y2="12"></line><line x1="2" y1="7" x2="7" y2="7"></line><line x1="2" y1="17" x2="7" y2="17"></line><line x1="17" y1="17" x2="22" y2="17"></line><line x1="17" y1="7" x2="22" y2="7"></line></svg>
-                </div>
+                <div class="feature-icon">🎬</div>
                 <h3>Watch Free Movies Online</h3>
                 <p>Discover the ultimate destination to stream full movies free. No subscriptions, just cinematic masterpieces at your fingertips.</p>
             </div>
             <div class="feature-card tilt-card">
-                <div class="feature-icon">
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--accent);"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect><polyline points="17 2 12 7 7 2"></polyline></svg>
-                </div>
+                <div class="feature-icon">📺</div>
                 <h3>Watch TV Shows Online Free</h3>
                 <p>Binge-watch top trending series in high definition. We curate the latest TV shows so you never miss an episode.</p>
             </div>
             <div class="feature-card tilt-card">
-                <div class="feature-icon">
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--accent);"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
-                </div>
+                <div class="feature-icon">⚡</div>
                 <h3>Zero Buffering, 4K Quality</h3>
                 <p>Stop searching for "movies free to watch online" and settling for bad quality. Experience premium, ad-free streaming.</p>
             </div>
@@ -144,35 +176,17 @@
     <section class="fade-in-stagger reviews-section" style="animation-delay: 0.4s;">
         <div class="reviews-grid">
             <div class="review-card tilt-card">
-                <div class="review-stars">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-                </div>
+                <div class="review-stars">★★★★★</div>
                 <p class="review-text">"Finally, a site without 100 popups. 4K quality is insane and it's completely free."</p>
                 <p class="review-author">- Alex M.</p>
             </div>
             <div class="review-card tilt-card">
-                <div class="review-stars">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-                </div>
+                <div class="review-stars">★★★★★</div>
                 <p class="review-text">"Better than paying $20/mo for Netflix. They have every new movie on day one."</p>
                 <p class="review-author">- Sarah T.</p>
             </div>
             <div class="review-card tilt-card">
-                <div class="review-stars">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-                </div>
+                <div class="review-stars">★★★★★</div>
                 <p class="review-text">"The interface is so premium. I can stream on my TV or phone seamlessly."</p>
                 <p class="review-author">- David K.</p>
             </div>
@@ -180,377 +194,23 @@
     </section>
 
     <section class="fade-in-stagger trending-section" style="animation-delay: 0.45s;">
-        <h2 class="trending-title">Trending & All-Time Classics to Watch Free</h2>
-        
-        <div class="trending-marquee-wrapper">
-            <!-- Visual Poster Marquee 1 (Movies) -->
-            <div class="trending-marquee-container">
-                <div class="trending-marquee poster-marquee">
-                    <div class="poster-card interactable tilt-card" title="Dune: Part Two">
-                        <img src="https://image.tmdb.org/t/p/w500/1pdfLvkbY9ohJlCjQH2JGqqUT1e.jpg" alt="Dune Part Two" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                        <div class="poster-fallback" style="display:none;">Dune: Part Two</div>
-                        <div class="poster-overlay"><div class="play-btn-small">▶</div></div>
-                    </div>
-                    <div class="poster-card interactable tilt-card" title="Deadpool & Wolverine">
-                        <img src="https://image.tmdb.org/t/p/w500/8cdWjvZQUExUUTzyp4t6EDMubfO.jpg" alt="Deadpool" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                        <div class="poster-fallback" style="display:none;">Deadpool & Wolverine</div>
-                        <div class="poster-overlay"><div class="play-btn-small">▶</div></div>
-                    </div>
-                    <div class="poster-card interactable tilt-card" title="Oppenheimer">
-                        <img src="https://image.tmdb.org/t/p/w500/8Gxv8gSFCU0XGDykEGv7zR1n2ua.jpg" alt="Oppenheimer" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                        <div class="poster-fallback" style="display:none;">Oppenheimer</div>
-                        <div class="poster-overlay"><div class="play-btn-small">▶</div></div>
-                    </div>
-                    <div class="poster-card interactable tilt-card" title="The Dark Knight">
-                        <img src="https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg" alt="The Dark Knight" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                        <div class="poster-fallback" style="display:none;">The Dark Knight</div>
-                        <div class="poster-overlay"><div class="play-btn-small">▶</div></div>
-                    </div>
-                    <div class="poster-card interactable tilt-card" title="Inception">
-                        <img src="https://image.tmdb.org/t/p/w500/oYuLEt3zVCKq57qu2F8dT7NIa6f.jpg" alt="Inception" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                        <div class="poster-fallback" style="display:none;">Inception</div>
-                        <div class="poster-overlay"><div class="play-btn-small">▶</div></div>
-                    </div>
-                    <div class="poster-card interactable tilt-card" title="Interstellar">
-                        <img src="https://image.tmdb.org/t/p/w500/gEU2QlsUUHXjNpeX40VNDbZ0rB8.jpg" alt="Interstellar" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                        <div class="poster-fallback" style="display:none;">Interstellar</div>
-                        <div class="poster-overlay"><div class="play-btn-small">▶</div></div>
-                    </div>
-                    <div class="poster-card interactable tilt-card" title="Spider-Man">
-                        <img src="https://image.tmdb.org/t/p/w500/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg" alt="Spider-Man" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                        <div class="poster-fallback" style="display:none;">Spider-Man: Across the Spider-Verse</div>
-                        <div class="poster-overlay"><div class="play-btn-small">▶</div></div>
-                    </div>
-                    <div class="poster-card interactable tilt-card" title="Avatar">
-                        <img src="https://image.tmdb.org/t/p/w500/t6HIqrHezINNdIyFSmYaG01xTay.jpg" alt="Avatar" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                        <div class="poster-fallback" style="display:none;">Avatar: The Way of Water</div>
-                        <div class="poster-overlay"><div class="play-btn-small">▶</div></div>
-                    </div>
-                </div>
-                <!-- duplicate for seamless scroll -->
-                <div class="trending-marquee poster-marquee" aria-hidden="true">
-                    <div class="poster-card interactable tilt-card" title="Dune: Part Two">
-                        <img src="https://image.tmdb.org/t/p/w500/1pdfLvkbY9ohJlCjQH2JGqqUT1e.jpg" alt="Dune Part Two" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                        <div class="poster-fallback" style="display:none;">Dune: Part Two</div>
-                        <div class="poster-overlay"><div class="play-btn-small">▶</div></div>
-                    </div>
-                    <div class="poster-card interactable tilt-card" title="Deadpool & Wolverine">
-                        <img src="https://image.tmdb.org/t/p/w500/8cdWjvZQUExUUTzyp4t6EDMubfO.jpg" alt="Deadpool" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                        <div class="poster-fallback" style="display:none;">Deadpool & Wolverine</div>
-                        <div class="poster-overlay"><div class="play-btn-small">▶</div></div>
-                    </div>
-                    <div class="poster-card interactable tilt-card" title="Oppenheimer">
-                        <img src="https://image.tmdb.org/t/p/w500/8Gxv8gSFCU0XGDykEGv7zR1n2ua.jpg" alt="Oppenheimer" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                        <div class="poster-fallback" style="display:none;">Oppenheimer</div>
-                        <div class="poster-overlay"><div class="play-btn-small">▶</div></div>
-                    </div>
-                    <div class="poster-card interactable tilt-card" title="The Dark Knight">
-                        <img src="https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg" alt="The Dark Knight" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                        <div class="poster-fallback" style="display:none;">The Dark Knight</div>
-                        <div class="poster-overlay"><div class="play-btn-small">▶</div></div>
-                    </div>
-                    <div class="poster-card interactable tilt-card" title="Inception">
-                        <img src="https://image.tmdb.org/t/p/w500/oYuLEt3zVCKq57qu2F8dT7NIa6f.jpg" alt="Inception" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                        <div class="poster-fallback" style="display:none;">Inception</div>
-                        <div class="poster-overlay"><div class="play-btn-small">▶</div></div>
-                    </div>
-                    <div class="poster-card interactable tilt-card" title="Interstellar">
-                        <img src="https://image.tmdb.org/t/p/w500/gEU2QlsUUHXjNpeX40VNDbZ0rB8.jpg" alt="Interstellar" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                        <div class="poster-fallback" style="display:none;">Interstellar</div>
-                        <div class="poster-overlay"><div class="play-btn-small">▶</div></div>
-                    </div>
-                    <div class="poster-card interactable tilt-card" title="Spider-Man">
-                        <img src="https://image.tmdb.org/t/p/w500/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg" alt="Spider-Man" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                        <div class="poster-fallback" style="display:none;">Spider-Man: Across the Spider-Verse</div>
-                        <div class="poster-overlay"><div class="play-btn-small">▶</div></div>
-                    </div>
-                    <div class="poster-card interactable tilt-card" title="Avatar">
-                        <img src="https://image.tmdb.org/t/p/w500/t6HIqrHezINNdIyFSmYaG01xTay.jpg" alt="Avatar" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                        <div class="poster-fallback" style="display:none;">Avatar: The Way of Water</div>
-                        <div class="poster-overlay"><div class="play-btn-small">▶</div></div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Visual Poster Marquee 2 (TV Shows) -->
-            <div class="trending-marquee-container" style="--animation-direction: reverse; margin-top: 1rem;">
-                <div class="trending-marquee poster-marquee">
-                    <div class="poster-card interactable tilt-card" title="Breaking Bad">
-                        <img src="https://image.tmdb.org/t/p/w500/ggFHVNu6YYI5L9pCfOacjizRGt.jpg" alt="Breaking Bad" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                        <div class="poster-fallback" style="display:none;">Breaking Bad</div>
-                        <div class="poster-overlay"><div class="play-btn-small">▶</div></div>
-                    </div>
-                    <div class="poster-card interactable tilt-card" title="Stranger Things">
-                        <img src="https://image.tmdb.org/t/p/w500/49WJfeN0moxb9IPfGn8m1MgzOzm.jpg" alt="Stranger Things" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                        <div class="poster-fallback" style="display:none;">Stranger Things</div>
-                        <div class="poster-overlay"><div class="play-btn-small">▶</div></div>
-                    </div>
-                    <div class="poster-card interactable tilt-card" title="Game of Thrones">
-                        <img src="https://image.tmdb.org/t/p/w500/1XS1oqL89opfnbLl8WnZY1O1uJx.jpg" alt="Game of Thrones" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                        <div class="poster-fallback" style="display:none;">Game of Thrones</div>
-                        <div class="poster-overlay"><div class="play-btn-small">▶</div></div>
-                    </div>
-                    <div class="poster-card interactable tilt-card" title="The Boys">
-                        <img src="https://image.tmdb.org/t/p/w500/dzOXllMX3R7iX9O9kUjRk5P2X5J.jpg" alt="The Boys" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                        <div class="poster-fallback" style="display:none;">The Boys</div>
-                        <div class="poster-overlay"><div class="play-btn-small">▶</div></div>
-                    </div>
-                    <div class="poster-card interactable tilt-card" title="The Matrix">
-                        <img src="https://image.tmdb.org/t/p/w500/f89U3ADr1oiB1s9GkdPOEpXUk5H.jpg" alt="The Matrix" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                        <div class="poster-fallback" style="display:none;">The Matrix</div>
-                        <div class="poster-overlay"><div class="play-btn-small">▶</div></div>
-                    </div>
-                    <div class="poster-card interactable tilt-card" title="House of the Dragon">
-                        <img src="https://image.tmdb.org/t/p/w500/1X4h40fcBaqcg9cgEVLe3NMTuX.jpg" alt="House of the Dragon" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                        <div class="poster-fallback" style="display:none;">House of the Dragon</div>
-                        <div class="poster-overlay"><div class="play-btn-small">▶</div></div>
-                    </div>
-                    <div class="poster-card interactable tilt-card" title="The Last of Us">
-                        <img src="https://image.tmdb.org/t/p/w500/uKvVjHNqB5pSqWaWBsP5Q82PZ2o.jpg" alt="The Last of Us" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                        <div class="poster-fallback" style="display:none;">The Last of Us</div>
-                        <div class="poster-overlay"><div class="play-btn-small">▶</div></div>
-                    </div>
-                    <div class="poster-card interactable tilt-card" title="Severance">
-                        <img src="https://image.tmdb.org/t/p/w500/zEqyD0SBt6HL7W9JQoWwtd5Do1T.jpg" alt="Severance" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                        <div class="poster-fallback" style="display:none;">Severance</div>
-                        <div class="poster-overlay"><div class="play-btn-small">▶</div></div>
-                    </div>
-                </div>
-                <!-- duplicate for seamless scroll -->
-                <div class="trending-marquee poster-marquee" aria-hidden="true">
-                    <div class="poster-card interactable tilt-card" title="Breaking Bad">
-                        <img src="https://image.tmdb.org/t/p/w500/ggFHVNu6YYI5L9pCfOacjizRGt.jpg" alt="Breaking Bad" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                        <div class="poster-fallback" style="display:none;">Breaking Bad</div>
-                        <div class="poster-overlay"><div class="play-btn-small">▶</div></div>
-                    </div>
-                    <div class="poster-card interactable tilt-card" title="Stranger Things">
-                        <img src="https://image.tmdb.org/t/p/w500/49WJfeN0moxb9IPfGn8m1MgzOzm.jpg" alt="Stranger Things" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                        <div class="poster-fallback" style="display:none;">Stranger Things</div>
-                        <div class="poster-overlay"><div class="play-btn-small">▶</div></div>
-                    </div>
-                    <div class="poster-card interactable tilt-card" title="Game of Thrones">
-                        <img src="https://image.tmdb.org/t/p/w500/1XS1oqL89opfnbLl8WnZY1O1uJx.jpg" alt="Game of Thrones" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                        <div class="poster-fallback" style="display:none;">Game of Thrones</div>
-                        <div class="poster-overlay"><div class="play-btn-small">▶</div></div>
-                    </div>
-                    <div class="poster-card interactable tilt-card" title="The Boys">
-                        <img src="https://image.tmdb.org/t/p/w500/dzOXllMX3R7iX9O9kUjRk5P2X5J.jpg" alt="The Boys" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                        <div class="poster-fallback" style="display:none;">The Boys</div>
-                        <div class="poster-overlay"><div class="play-btn-small">▶</div></div>
-                    </div>
-                    <div class="poster-card interactable tilt-card" title="The Matrix">
-                        <img src="https://image.tmdb.org/t/p/w500/f89U3ADr1oiB1s9GkdPOEpXUk5H.jpg" alt="The Matrix" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                        <div class="poster-fallback" style="display:none;">The Matrix</div>
-                        <div class="poster-overlay"><div class="play-btn-small">▶</div></div>
-                    </div>
-                    <div class="poster-card interactable tilt-card" title="House of the Dragon">
-                        <img src="https://image.tmdb.org/t/p/w500/1X4h40fcBaqcg9cgEVLe3NMTuX.jpg" alt="House of the Dragon" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                        <div class="poster-fallback" style="display:none;">House of the Dragon</div>
-                        <div class="poster-overlay"><div class="play-btn-small">▶</div></div>
-                    </div>
-                    <div class="poster-card interactable tilt-card" title="The Last of Us">
-                        <img src="https://image.tmdb.org/t/p/w500/uKvVjHNqB5pSqWaWBsP5Q82PZ2o.jpg" alt="The Last of Us" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                        <div class="poster-fallback" style="display:none;">The Last of Us</div>
-                        <div class="poster-overlay"><div class="play-btn-small">▶</div></div>
-                    </div>
-                    <div class="poster-card interactable tilt-card" title="Severance">
-                        <img src="https://image.tmdb.org/t/p/w500/zEqyD0SBt6HL7W9JQoWwtd5Do1T.jpg" alt="Severance" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                        <div class="poster-fallback" style="display:none;">Severance</div>
-                        <div class="poster-overlay"><div class="play-btn-small">▶</div></div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Traditional Keywords (SEO & Search Matches) -->
-                <div class="trending-marquee">
-                    <div class="trending-pill">Backrooms</div>
-                    <div class="trending-pill">The Mandalorian & Grogu</div>
-                    <div class="trending-pill">Hoppers</div>
-                    <div class="trending-pill">Pegasus 3</div>
-                    <div class="trending-pill">The Super Mario Galaxy Movie</div>
-                    <div class="trending-pill">Michael</div>
-                    <div class="trending-pill">Project Hail Mary</div>
-                    <div class="trending-pill">Scream 7</div>
-                    <div class="trending-pill">Avatar: Fire and Ash</div>
-                    <div class="trending-pill">Office Romance</div>
-                    <div class="trending-pill">Nope</div>
-                    <div class="trending-pill">GOAT</div>
-                    <div class="trending-pill">Bugonia</div>
-                    <div class="trending-pill">The Last Duel</div>
-                    <div class="trending-pill">Bill & Ted Trilogy</div>
-                    <div class="trending-pill">28 Years Later: The Bone Temple</div>
-                    <div class="trending-pill">Obsession</div>
-                    <div class="trending-pill">Twinless</div>
-                    <div class="trending-pill">Is This Thing On?</div>
-                    <div class="trending-pill">Governor: The Silent Saviour</div>
-                </div>
-                <div class="trending-marquee" aria-hidden="true">
-                    <div class="trending-pill">Backrooms</div>
-                    <div class="trending-pill">The Mandalorian & Grogu</div>
-                    <div class="trending-pill">Hoppers</div>
-                    <div class="trending-pill">Pegasus 3</div>
-                    <div class="trending-pill">The Super Mario Galaxy Movie</div>
-                    <div class="trending-pill">Michael</div>
-                    <div class="trending-pill">Project Hail Mary</div>
-                    <div class="trending-pill">Scream 7</div>
-                    <div class="trending-pill">Avatar: Fire and Ash</div>
-                    <div class="trending-pill">Office Romance</div>
-                    <div class="trending-pill">Nope</div>
-                    <div class="trending-pill">GOAT</div>
-                    <div class="trending-pill">Bugonia</div>
-                    <div class="trending-pill">The Last Duel</div>
-                    <div class="trending-pill">Bill & Ted Trilogy</div>
-                    <div class="trending-pill">28 Years Later: The Bone Temple</div>
-                    <div class="trending-pill">Obsession</div>
-                    <div class="trending-pill">Twinless</div>
-                    <div class="trending-pill">Is This Thing On?</div>
-                    <div class="trending-pill">Governor: The Silent Saviour</div>
-                </div>
-            </div>
-
-            <div class="trending-marquee-container" style="--animation-direction: reverse; margin-top: 1rem;">
-                <div class="trending-marquee">
-                    <div class="trending-pill">House of the Dragon</div>
-                    <div class="trending-pill">The Bear</div>
-                    <div class="trending-pill">Michael Jackson: The Verdict</div>
-                    <div class="trending-pill">Cape Fear</div>
-                    <div class="trending-pill">Sugar</div>
-                    <div class="trending-pill">The Four Seasons</div>
-                    <div class="trending-pill">Sweet Magnolias</div>
-                    <div class="trending-pill">Avatar: The Last Airbender</div>
-                    <div class="trending-pill">The Witness</div>
-                    <div class="trending-pill">The Boroughs</div>
-                    <div class="trending-pill">A Knight of the Seven Kingdoms</div>
-                    <div class="trending-pill">The Legend of Vox Machina</div>
-                    <div class="trending-pill">A Good Girl’s Guide to Murder</div>
-                    <div class="trending-pill">The Pitt</div>
-                    <div class="trending-pill">I Will Find You</div>
-                    <div class="trending-pill">Industry</div>
-                    <div class="trending-pill">Power Book III: Raising Kanan</div>
-                    <div class="trending-pill">The Boys</div>
-                    <div class="trending-pill">Amandaland</div>
-                    <div class="trending-pill">Not Suitable for Work</div>
-                </div>
-                <div class="trending-marquee" aria-hidden="true">
-                    <div class="trending-pill">House of the Dragon</div>
-                    <div class="trending-pill">The Bear</div>
-                    <div class="trending-pill">Michael Jackson: The Verdict</div>
-                    <div class="trending-pill">Cape Fear</div>
-                    <div class="trending-pill">Sugar</div>
-                    <div class="trending-pill">The Four Seasons</div>
-                    <div class="trending-pill">Sweet Magnolias</div>
-                    <div class="trending-pill">Avatar: The Last Airbender</div>
-                    <div class="trending-pill">The Witness</div>
-                    <div class="trending-pill">The Boroughs</div>
-                    <div class="trending-pill">A Knight of the Seven Kingdoms</div>
-                    <div class="trending-pill">The Legend of Vox Machina</div>
-                    <div class="trending-pill">A Good Girl’s Guide to Murder</div>
-                    <div class="trending-pill">The Pitt</div>
-                    <div class="trending-pill">I Will Find You</div>
-                    <div class="trending-pill">Industry</div>
-                    <div class="trending-pill">Power Book III: Raising Kanan</div>
-                    <div class="trending-pill">The Boys</div>
-                    <div class="trending-pill">Amandaland</div>
-                    <div class="trending-pill">Not Suitable for Work</div>
-                </div>
-            </div>
-
-            <!-- All-Time Classic Movies -->
-            <div class="trending-marquee-container" style="margin-top: 1rem;">
-                <div class="trending-marquee">
-                    <div class="trending-pill">The Godfather</div>
-                    <div class="trending-pill">The Shawshank Redemption</div>
-                    <div class="trending-pill">The Dark Knight</div>
-                    <div class="trending-pill">Pulp Fiction</div>
-                    <div class="trending-pill">Forrest Gump</div>
-                    <div class="trending-pill">Fight Club</div>
-                    <div class="trending-pill">Inception</div>
-                    <div class="trending-pill">The Matrix</div>
-                    <div class="trending-pill">Goodfellas</div>
-                    <div class="trending-pill">Seven Samurai</div>
-                    <div class="trending-pill">City of God</div>
-                    <div class="trending-pill">The Silence of the Lambs</div>
-                    <div class="trending-pill">Star Wars</div>
-                    <div class="trending-pill">Spirited Away</div>
-                    <div class="trending-pill">Parasite</div>
-                    <div class="trending-pill">Gladiator</div>
-                    <div class="trending-pill">The Prestige</div>
-                    <div class="trending-pill">Interstellar</div>
-                    <div class="trending-pill">The Lion King</div>
-                    <div class="trending-pill">Titanic</div>
-                </div>
-                <div class="trending-marquee" aria-hidden="true">
-                    <div class="trending-pill">The Godfather</div>
-                    <div class="trending-pill">The Shawshank Redemption</div>
-                    <div class="trending-pill">The Dark Knight</div>
-                    <div class="trending-pill">Pulp Fiction</div>
-                    <div class="trending-pill">Forrest Gump</div>
-                    <div class="trending-pill">Fight Club</div>
-                    <div class="trending-pill">Inception</div>
-                    <div class="trending-pill">The Matrix</div>
-                    <div class="trending-pill">Goodfellas</div>
-                    <div class="trending-pill">Seven Samurai</div>
-                    <div class="trending-pill">City of God</div>
-                    <div class="trending-pill">The Silence of the Lambs</div>
-                    <div class="trending-pill">Star Wars</div>
-                    <div class="trending-pill">Spirited Away</div>
-                    <div class="trending-pill">Parasite</div>
-                    <div class="trending-pill">Gladiator</div>
-                    <div class="trending-pill">The Prestige</div>
-                    <div class="trending-pill">Interstellar</div>
-                    <div class="trending-pill">The Lion King</div>
-                    <div class="trending-pill">Titanic</div>
-                </div>
-            </div>
-
-            <!-- All-Time Classic TV Shows -->
-            <div class="trending-marquee-container" style="--animation-direction: reverse; margin-top: 1rem;">
-                <div class="trending-marquee">
-                    <div class="trending-pill">Breaking Bad</div>
-                    <div class="trending-pill">The Wire</div>
-                    <div class="trending-pill">The Sopranos</div>
-                    <div class="trending-pill">Game of Thrones</div>
-                    <div class="trending-pill">Avatar: The Last Airbender</div>
-                    <div class="trending-pill">The Office</div>
-                    <div class="trending-pill">Stranger Things</div>
-                    <div class="trending-pill">Friends</div>
-                    <div class="trending-pill">Seinfeld</div>
-                    <div class="trending-pill">The Twilight Zone</div>
-                    <div class="trending-pill">Band of Brothers</div>
-                    <div class="trending-pill">Chernobyl</div>
-                    <div class="trending-pill">Better Call Saul</div>
-                    <div class="trending-pill">Sherlock</div>
-                    <div class="trending-pill">True Detective</div>
-                    <div class="trending-pill">Fargo</div>
-                    <div class="trending-pill">Peaky Blinders</div>
-                    <div class="trending-pill">Succession</div>
-                    <div class="trending-pill">The Simpsons</div>
-                    <div class="trending-pill">Doctor Who</div>
-                </div>
-                <div class="trending-marquee" aria-hidden="true">
-                    <div class="trending-pill">Breaking Bad</div>
-                    <div class="trending-pill">The Wire</div>
-                    <div class="trending-pill">The Sopranos</div>
-                    <div class="trending-pill">Game of Thrones</div>
-                    <div class="trending-pill">Avatar: The Last Airbender</div>
-                    <div class="trending-pill">The Office</div>
-                    <div class="trending-pill">Stranger Things</div>
-                    <div class="trending-pill">Friends</div>
-                    <div class="trending-pill">Seinfeld</div>
-                    <div class="trending-pill">The Twilight Zone</div>
-                    <div class="trending-pill">Band of Brothers</div>
-                    <div class="trending-pill">Chernobyl</div>
-                    <div class="trending-pill">Better Call Saul</div>
-                    <div class="trending-pill">Sherlock</div>
-                    <div class="trending-pill">True Detective</div>
-                    <div class="trending-pill">Fargo</div>
-                    <div class="trending-pill">Peaky Blinders</div>
-                    <div class="trending-pill">Succession</div>
-                    <div class="trending-pill">The Simpsons</div>
-                    <div class="trending-pill">Doctor Who</div>
-                </div>
+        <h2 class="trending-title">Trending Movies</h2>
+        <div id="moviesCarousel" class="snap-carousel">
+            <!-- Populated by JS -->
+            <div class="poster-card interactable tilt-card">
+                <div class="poster-fallback">Loading...</div>
             </div>
         </div>
+
+        <h2 class="trending-title" style="margin-top: 3rem;">Trending TV Shows</h2>
+        <div id="tvCarousel" class="snap-carousel">
+            <!-- Populated by JS -->
+            <div class="poster-card interactable tilt-card">
+                <div class="poster-fallback">Loading...</div>
+            </div>
+        </div>
+    </section>
+    
         
         <div class="final-cta fade-in-stagger" style="animation-delay: 0.5s;">
             <h2>Ready for the ultimate cinema experience?</h2>
