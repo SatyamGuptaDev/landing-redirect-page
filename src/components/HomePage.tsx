@@ -33,33 +33,56 @@ export default function HomePage() {
 
   return (
     <main className="min-h-screen bg-zivox-bg pb-20">
-      {/* Static Hero Section (SEO & Redirect Focus) */}
-      <div className="relative w-full min-h-[50vh] md:h-[60vh] flex flex-col items-center justify-center text-center px-4 overflow-hidden py-12 md:py-0 mt-8">
-        <div className="absolute inset-0 bg-gradient-to-b from-zivox-violet/10 via-zivox-bg to-zivox-bg z-0 pointer-events-none" />
+      {/* Premium Silicon Valley Funnel Hero */}
+      <div className="relative w-full min-h-[75vh] md:min-h-[85vh] flex flex-col items-center justify-center text-center px-4 overflow-hidden pt-24 pb-16">
         
-        <div className="relative z-10 space-y-6 max-w-4xl animate-in fade-in slide-in-from-bottom-8 duration-1000">
-          <h1 className="text-4xl sm:text-5xl md:text-7xl font-display font-bold text-foreground tracking-tight drop-shadow-lg leading-tight">
-            Your Free Streaming <br className="hidden sm:block" /> Era Begins.
+        {/* Ambient Dark Void & Radial Glows */}
+        <div className="absolute inset-0 bg-[#020202] z-0 pointer-events-none" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] bg-zivox-violet/10 rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[400px] bg-blue-500/10 rounded-full blur-[100px] pointer-events-none" />
+        
+        {/* Subtle Glass Grid Overlay */}
+        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.03] pointer-events-none mix-blend-overlay" />
+
+        <div className="relative z-10 space-y-8 max-w-5xl mx-auto animate-in fade-in slide-in-from-bottom-8 duration-1000">
+          
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 backdrop-blur-md text-xs font-medium tracking-widest text-foreground/80 uppercase mb-4 shadow-xl">
+            <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" />
+            The Ultimate Cinematic Experience
+          </div>
+
+          <h1 className="text-5xl sm:text-6xl md:text-8xl lg:text-9xl font-display font-black tracking-tighter leading-[1.1]">
+            <span className="bg-clip-text text-transparent bg-gradient-to-b from-white via-white/90 to-white/40 drop-shadow-sm">
+              Your Streaming
+            </span>
+            <br />
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-zivox-violet to-blue-500 drop-shadow-sm">
+              Era Begins.
+            </span>
           </h1>
           
-          <p className="text-lg md:text-xl text-foreground/80 max-w-2xl mx-auto font-medium leading-relaxed">
-            Zivox has evolved. The cinematic universe is now ad-free, uninterrupted, and better than ever. Unlock your premium pass to infinite entertainment below.
+          <p className="text-lg md:text-2xl text-foreground/60 max-w-2xl mx-auto font-light leading-relaxed tracking-wide">
+            Zivox has evolved. Ad-free, uninterrupted, and better than ever. Unlock your premium pass to infinite entertainment below.
           </p>
 
-          <div className="pt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
-            <div className="flex items-center gap-3 px-6 py-4 rounded-full bg-white/5 dark:bg-white/10 border border-foreground/10 shadow-xl text-foreground/90 font-mono text-sm">
-              <span className="opacity-50">https://</span>
-              <span className="font-bold text-foreground">zivoxtv.live</span>
-            </div>
-            
+          <div className="pt-10 flex flex-col items-center justify-center gap-6">
             <a 
               href="https://zivoxtv.live/"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-10 py-4 rounded-full bg-blue-600 hover:bg-blue-500 text-white font-bold transition-all shadow-lg shadow-blue-600/30 hover:shadow-blue-600/50 hover:-translate-y-1"
+              className="group relative inline-flex items-center justify-center gap-3 px-12 py-5 rounded-2xl bg-white text-black font-bold text-lg transition-all hover:scale-105 will-change-transform shadow-[0_0_40px_rgba(255,255,255,0.15)] hover:shadow-[0_0_60px_rgba(255,255,255,0.3)] overflow-hidden"
             >
-              Enter ZivoxTV Now
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/50 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite]" />
+              <span className="relative z-10">Enter ZivoxTV Now</span>
+              <svg className="w-5 h-5 relative z-10 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
             </a>
+            
+            <div className="flex items-center gap-2 text-foreground/40 font-mono text-xs md:text-sm tracking-wider">
+              <span>Redirecting to:</span>
+              <span className="font-bold text-foreground/80 border-b border-foreground/20 pb-0.5">https://zivoxtv.live</span>
+            </div>
           </div>
         </div>
       </div>
