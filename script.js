@@ -1,4 +1,17 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // ---- Prevent search indexing on zivoxtv.live ----
+    if (window.location.hostname === 'zivoxtv.live' || window.location.hostname === 'www.zivoxtv.live') {
+        const robotsMeta = document.querySelector('meta[name="robots"]');
+        if (robotsMeta) {
+            robotsMeta.setAttribute('content', 'noindex, nofollow');
+        } else {
+            const meta = document.createElement('meta');
+            meta.name = 'robots';
+            meta.content = 'noindex, nofollow';
+            document.head.appendChild(meta);
+        }
+    }
+
     // ---- Theme Toggle Logic ----
     const themeToggle = document.getElementById('themeToggle');
     const iconSun = document.querySelector('.icon-sun');
