@@ -239,8 +239,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    populateCarousel('https://db.videasy.net/3/trending/movie/day', 'moviesCarousel', 'Movie', fallbackMovies);
-    populateCarousel('https://db.videasy.net/3/trending/tv/day', 'tvCarousel', 'TV Show', fallbackTVShows);
+    populateCarousel('https://db.videasy.to/3/trending/movie/day', 'moviesCarousel', 'Movie', fallbackMovies);
+    populateCarousel('https://db.videasy.to/3/trending/tv/day', 'tvCarousel', 'TV Show', fallbackTVShows);
 
     // ---- Live Counter Logic (Database-less synchronization) ----
     const userCountEl = document.getElementById('userCount');
