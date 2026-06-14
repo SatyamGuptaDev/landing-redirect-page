@@ -38,16 +38,16 @@ export default function MoviePage({ id }: { id: string }) {
 
   return (
     <main className="min-h-screen bg-zivox-bg pb-20 relative">
-      {/* Hero Backdrop - Absolute positioned behind everything */}
-      <div className="absolute top-0 left-0 w-full h-[60vh] sm:h-[70vh] lg:h-[85vh] pointer-events-none">
-        <div className="absolute inset-0 bg-gradient-to-t from-zivox-bg via-zivox-bg/80 to-transparent z-10" />
-        <div className="absolute inset-0 bg-black/40 z-[5]" />
+      {/* Hero Backdrop - Absolute positioned with advanced gradient masking */}
+      <div className="absolute top-0 left-0 w-full h-[65vh] sm:h-[80vh] lg:h-[90vh] pointer-events-none">
+        <div className="absolute inset-0 bg-gradient-to-t from-zivox-bg via-zivox-bg/90 to-black/20 z-10" />
+        <div className="absolute inset-0 bg-gradient-to-r from-zivox-bg via-zivox-bg/70 to-transparent hidden md:block z-[11]" />
         {movie.backdrop_path ? (
           <Image
             src={`https://image.tmdb.org/t/p/w1280${movie.backdrop_path}`}
             alt={movie.title || 'Backdrop'}
             fill
-            className="object-cover"
+            className="object-cover object-top opacity-80"
             priority
           />
         ) : (
@@ -55,12 +55,12 @@ export default function MoviePage({ id }: { id: string }) {
         )}
       </div>
 
-      <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 md:px-12 pt-[25vh] sm:pt-[35vh] lg:pt-[45vh]">
-        <BackButton className="mb-6 md:mb-10" />
+      <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 md:px-12 pt-[20vh] sm:pt-[30vh] lg:pt-[35vh]">
+        <BackButton className="mb-8" />
         
-        <div className="flex flex-col md:flex-row gap-6 md:gap-12">
-          {/* Poster */}
-          <div className="hidden sm:block flex-none w-40 md:w-56 lg:w-64 aspect-[2/3] rounded-2xl overflow-hidden shadow-2xl ring-1 ring-white/10 dark:ring-white/5 bg-zinc-900">
+        <div className="flex flex-col md:flex-row items-end md:items-start gap-6 md:gap-12">
+          {/* Poster (Glowing, Overlapping) */}
+          <div className="flex-none w-32 sm:w-48 md:w-64 aspect-[2/3] rounded-2xl overflow-hidden shadow-[0_0_40px_rgba(0,0,0,0.5)] ring-1 ring-white/10 bg-zinc-900 relative z-30 transform md:-translate-y-8">
             {movie.poster_path && (
               <Image
                 src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
@@ -73,32 +73,34 @@ export default function MoviePage({ id }: { id: string }) {
           </div>
 
           {/* Details */}
-          <div className="flex-1 pt-4 md:pt-12">
+          <div className="flex-1 w-full pt-4 md:pt-0">
             <div className="animate-in fade-in slide-in-from-bottom-4 duration-700">
-              <div className="flex flex-wrap gap-2 mb-4">
-                {movie.genres?.map(g => (
-                  <span key={g.id} className="px-3 py-1 rounded-full bg-white/10 backdrop-blur-md text-xs font-medium text-foreground uppercase tracking-widest border border-black/5 dark:border-white/5">
-                    {g.name}
-                  </span>
-                ))}
-              </div>
-              <h1 className="text-4xl md:text-5xl lg:text-7xl font-display font-bold text-foreground mb-4 drop-shadow-lg">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-black text-foreground mb-4 drop-shadow-2xl tracking-tight leading-none">
                 {movie.title}
               </h1>
-              <div className="flex flex-wrap items-center gap-4 text-sm md:text-base text-foreground/80 mb-6">
-                <span className="flex items-center gap-1 text-zivox-gold font-bold">
+              
+              <div className="flex flex-wrap items-center gap-3 md:gap-4 text-sm md:text-base text-foreground/80 mb-6 font-medium">
+                <span className="flex items-center gap-1 text-zivox-gold bg-zivox-gold/10 px-2 py-1 rounded-md border border-zivox-gold/20">
                   ⭐ {movie.vote_average?.toFixed(1)}
                 </span>
-                <span className="text-foreground/50">•</span>
                 <span>{year}</span>
                 {movie.runtime && (
                   <>
-                    <span className="text-foreground/50">•</span>
+                    <span className="w-1 h-1 rounded-full bg-foreground/30" />
                     <span>{movie.runtime} min</span>
                   </>
                 )}
+                <span className="w-1 h-1 rounded-full bg-foreground/30 hidden sm:block" />
+                <div className="flex flex-wrap gap-2 w-full sm:w-auto mt-2 sm:mt-0">
+                  {movie.genres?.map(g => (
+                    <span key={g.id} className="text-xs text-foreground/60 border border-foreground/10 px-2 py-0.5 rounded-full">
+                      {g.name}
+                    </span>
+                  ))}
+                </div>
               </div>
-              <p className="max-w-3xl text-foreground/70 text-sm md:text-base leading-relaxed mb-8 drop-shadow-md">
+              
+              <p className="max-w-3xl text-foreground/80 text-sm sm:text-base md:text-lg leading-relaxed mb-8 drop-shadow-md">
                 {movie.overview}
               </p>
 
@@ -107,12 +109,12 @@ export default function MoviePage({ id }: { id: string }) {
                   href="https://zivoxtv.live/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-blue-600 hover:bg-blue-500 font-bold text-white shadow-lg shadow-blue-600/30 hover:shadow-blue-600/50 transition-all hover:-translate-y-1"
+                  className="w-full sm:w-auto flex items-center justify-center gap-2 px-10 py-4 rounded-xl bg-blue-600 hover:bg-blue-500 font-bold text-white shadow-lg shadow-blue-600/30 hover:shadow-blue-600/50 transition-all hover:-translate-y-1"
                 >
                   Watch Free on Zivox
                 </a>
                 {trailer && (
-                  <div className="w-full sm:w-auto">
+                  <div className="w-full sm:w-auto [&>button]:w-full [&>button]:rounded-xl [&>button]:py-4 [&>button]:px-10">
                     <TrailerButton trailerKey={trailer.key} />
                   </div>
                 )}
