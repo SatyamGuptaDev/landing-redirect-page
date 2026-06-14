@@ -14,10 +14,14 @@ export default function Carousel({ title, badge, items, type }: CarouselProps) {
   return (
     <section className="mb-12 relative w-full max-w-[100vw] overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 md:px-12 mb-4 flex items-center gap-3">
-        <h2 className="text-xl md:text-2xl font-display font-bold text-white/90">{title}</h2>
-        <span className="px-2 py-0.5 rounded text-xs font-bold bg-white/10 text-white/70 uppercase tracking-wider">
-          {badge}
-        </span>
+        <h2 className="text-xl md:text-2xl font-display font-bold text-foreground">
+          {title}
+        </h2>
+        {badge && (
+          <span className="px-3 py-1 text-[10px] sm:text-xs font-bold tracking-widest uppercase bg-white/5 dark:bg-white/10 text-foreground/70 border border-foreground/10 rounded-md">
+            {badge}
+          </span>
+        )}
       </div>
       
       <div className="flex overflow-x-auto gap-4 px-6 md:px-12 pb-8 pt-2 hide-scrollbar snap-x-mandatory scroll-smooth w-full">

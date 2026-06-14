@@ -49,7 +49,7 @@ export default function Navbar() {
         <Link href="/" className="flex items-center gap-1 font-display font-bold text-2xl tracking-tight hover:scale-105 transition-transform">
           <span className="text-foreground">ZIV</span>
           <div className="w-6 h-6 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center">
-            <div className="w-0 h-0 border-t-[4px] border-t-transparent border-l-[6px] border-l-white border-b-[4px] border-b-transparent ml-0.5"></div>
+            <div className="w-0 h-0 border-t-[4px] border-t-transparent border-l-[6px] border-l-foreground border-b-[4px] border-b-transparent ml-0.5"></div>
           </div>
           <span className="text-foreground">X</span>
         </Link>
