@@ -1,13 +1,15 @@
 :root {
-    --bg-base: #0a0a0f;
-    --text-main: #FFFFFF;
-    --text-muted: #A1A1AA;
+    /* Ultra Premium Dark Theme */
+    --bg-main: #060608;
+    --bg-surface: #0a0a0f;
+    --text-main: #fcfcfc;
+    --text-muted: #8e8e99;
     --accent: #EAB308; /* Cinematic Gold amber-400 */
     --accent-bg: rgba(234, 179, 8, 0.1);
     --border-color: rgba(255, 255, 255, 0.05); /* Soft white/5 */
     --border-hover: rgba(255, 255, 255, 0.1); /* Soft white/10 */
-    --pill-bg: rgba(255, 255, 255, 0.05); /* bg-white/5 */
-    --pill-hover: rgba(255, 255, 255, 0.08);
+    --pill-bg: rgba(255, 255, 255, 0.03); /* bg-white/3 */
+    --pill-bg-hover: rgba(255, 255, 255, 0.08);
     --btn-bg: #FFFFFF;
     --btn-text: #0a0a0f;
     --btn-hover: #f0f0f0;
@@ -16,6 +18,7 @@
     --hero-gradient-1: #FFFFFF;
     --hero-gradient-2: #A1A1AA;
     --ambient-light: rgba(234, 179, 8, 0.08);
+    --glow-color: rgba(234, 179, 8, 0.15);
 }
 
 [data-theme="light"] {
@@ -32,9 +35,9 @@
     --accent: #2563eb;
     
     --glow-color: rgba(37, 99, 235, 0.15);
-    --btn-bg: #0a0a0f;
+    --btn-bg: var(--accent);
     --btn-text: #FFFFFF;
-    --btn-hover: #27272A;
+    --btn-hover: #1e40af;
     --tooltip-bg: #0a0a0f;
     --tooltip-text: #FFFFFF;
     --hero-gradient-1: #0a0a0f;
@@ -822,9 +825,7 @@ h1, h2, h3, h4 {
     transition: opacity 0.3s ease;
 }
 
-[data-theme="light"] .poster-info-overlay {
-    background: linear-gradient(to top, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.7) 40%, transparent 100%);
-}
+/* Removed light mode override to preserve cinematic darkness */
 
 .poster-title {
     font-family: 'Outfit', sans-serif;
