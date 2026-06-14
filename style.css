@@ -839,11 +839,6 @@ h1, h2, h3, h4 {
     text-shadow: 0 2px 4px rgba(0,0,0,0.5);
 }
 
-[data-theme="light"] .poster-title {
-    color: #000;
-    text-shadow: none;
-}
-
 .poster-meta {
     display: flex;
     align-items: center;
@@ -851,10 +846,6 @@ h1, h2, h3, h4 {
     font-size: 0.75rem;
     color: rgba(255,255,255,0.8);
     font-weight: 500;
-}
-
-[data-theme="light"] .poster-meta {
-    color: rgba(0,0,0,0.7);
 }
 
 .poster-meta .rating {

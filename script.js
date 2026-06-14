@@ -7,10 +7,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // Check local storage or system preference
     let savedTheme = localStorage.getItem('zivox-theme');
     
-    // Default to light if no saved theme
+    // Default to dark if no saved theme
     if (!savedTheme) {
-        savedTheme = 'light';
-        localStorage.setItem('zivox-theme', 'light');
+        savedTheme = 'dark';
+        localStorage.setItem('zivox-theme', 'dark');
     }
     
     if (savedTheme === 'light') {
