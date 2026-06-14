@@ -344,25 +344,33 @@ document.addEventListener('DOMContentLoaded', () => {
     if (userCountEl) {
         const updateCounter = () => {
             const now = Date.now();
-            const timeInterval = Math.floor(now / 5000); // changes every 5s
             
-            // Generate a realistic daily curve based on UTC hour.
-            // Peak traffic around UTC 20:00 (evening for many).
-            const dailyWave = Math.cos((now - 20 * 3600000) / 86400000 * Math.PI * 2) * 2000 + 4500; // Fluctuate smoothly between 2500 and 6500
+            // Align to 2.5-second deterministic blocks so all clients worldwide see the exact same number
+            const timeWindow = Math.floor(now / 2500) * 2500;
             
-            // Add short-term deterministic pseudo-random noise to make it look "live"
-            const noise1 = Math.sin(timeInterval * 12.34) * 350;
-            const noise2 = Math.cos(timeInterval * 7.89) * 120;
-            const noise3 = Math.sin(timeInterval * 4.56) * 45;
+            // Base daily wave: Peak traffic around UTC 20:00. Range: ~750 to ~2750
+            const dailyWave = Math.cos((timeWindow - 20 * 3600000) / 86400000 * Math.PI * 2) * 1000 + 1750;
             
-            // Total calculation keeps it tightly within the 2k - 7k realistic range
-            const currentCount = Math.floor(dailyWave + noise1 + noise2 + noise3);
+            // Macro noise: Smooth variations over 5 and 15 minute periods
+            const macroNoise = Math.sin(timeWindow / 300000) * 150 + Math.cos(timeWindow / 900000) * 200;
+            
+            // Micro noise: Gentle realistic live fluctuations over 10s and 25s periods
+            const microNoise = Math.sin(timeWindow / 10000) * 30 + Math.cos(timeWindow / 25000) * 45;
+            
+            // Jitter: Pseudo-random small live ticks (±15) based strictly on timeWindow
+            const jitter = Math.sin(timeWindow) * 15;
+            
+            let currentCount = Math.floor(dailyWave + macroNoise + microNoise + jitter);
+            
+            // Clamp strictly between 500 and 3000
+            currentCount = Math.max(500, Math.min(3000, currentCount));
+            
             userCountEl.textContent = currentCount.toLocaleString();
         };
         
         updateCounter();
-        // Update every 5 seconds to match the interval
-        setInterval(updateCounter, 5000);
+        // Update every 2.5 seconds to feel live and responsive
+        setInterval(updateCounter, 2500);
     }
 
 });
