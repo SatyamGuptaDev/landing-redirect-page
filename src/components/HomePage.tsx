@@ -3,7 +3,6 @@
 import { useEffect, useState } from 'react';
 import { fetchTrending, discoverRegional, TMDBResponse } from '@/lib/tmdb';
 import Carousel from '@/components/Carousel';
-import Navbar from '@/components/Navbar';
 
 export default function HomePage() {
   const [data, setData] = useState<{
@@ -29,16 +28,14 @@ export default function HomePage() {
   }, []);
 
   return (
-    <main className="min-h-screen bg-zivox-bg pb-20">
-      <Navbar />
-
+    <main className="min-h-screen bg-zivox-bg pb-20 pt-20">
       {/* Hero Section */}
-      <div className="relative w-full h-[70vh] flex flex-col items-center justify-center text-center px-4 overflow-hidden">
+      <div className="relative w-full min-h-[60vh] md:h-[70vh] flex flex-col items-center justify-center text-center px-4 overflow-hidden py-12 md:py-0">
         <div className="absolute inset-0 bg-gradient-to-b from-blue-600/20 to-zivox-bg z-0 pointer-events-none" />
         
         <div className="relative z-10 space-y-6 max-w-4xl animate-in fade-in slide-in-from-bottom-8 duration-1000">
-          <h1 className="text-5xl md:text-7xl font-display font-bold text-foreground tracking-tight drop-shadow-lg">
-            Your Free Streaming <br className="hidden md:block" /> Era Begins.
+          <h1 className="text-4xl sm:text-5xl md:text-7xl font-display font-bold text-foreground tracking-tight drop-shadow-lg leading-tight">
+            Your Free Streaming <br className="hidden sm:block" /> Era Begins.
           </h1>
           
           <p className="text-lg md:text-xl text-foreground/70 max-w-2xl mx-auto font-light leading-relaxed">

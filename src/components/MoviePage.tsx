@@ -37,11 +37,10 @@ export default function MoviePage({ id }: { id: string }) {
   const year = movie.release_date?.split('-')[0];
 
   return (
-    <main className="min-h-screen bg-zivox-bg pb-20">
-      <BackButton />
-      {/* Hero Backdrop */}
-      <div className="relative w-full h-[60vh] sm:h-[70vh] lg:h-[80vh]">
-        <div className="absolute inset-0 bg-gradient-to-t from-zivox-bg via-zivox-bg/60 to-transparent z-10" />
+    <main className="min-h-screen bg-zivox-bg pb-20 relative">
+      {/* Hero Backdrop - Absolute positioned behind everything */}
+      <div className="absolute top-0 left-0 w-full h-[60vh] sm:h-[70vh] lg:h-[85vh] pointer-events-none">
+        <div className="absolute inset-0 bg-gradient-to-t from-zivox-bg via-zivox-bg/80 to-transparent z-10" />
         <div className="absolute inset-0 bg-black/40 z-[5]" />
         {movie.backdrop_path ? (
           <Image
@@ -56,8 +55,10 @@ export default function MoviePage({ id }: { id: string }) {
         )}
       </div>
 
-      <div className="relative z-20 max-w-7xl mx-auto px-6 md:px-12 -mt-[20vh] md:-mt-[30vh]">
-        <div className="flex flex-col md:flex-row gap-8 md:gap-12">
+      <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 md:px-12 pt-[25vh] sm:pt-[35vh] lg:pt-[45vh]">
+        <BackButton className="mb-6 md:mb-10" />
+        
+        <div className="flex flex-col md:flex-row gap-6 md:gap-12">
           {/* Poster */}
           <div className="hidden sm:block flex-none w-40 md:w-56 lg:w-64 aspect-[2/3] rounded-2xl overflow-hidden shadow-2xl ring-1 ring-white/10 dark:ring-white/5 bg-zinc-900">
             {movie.poster_path && (
@@ -101,17 +102,19 @@ export default function MoviePage({ id }: { id: string }) {
                 {movie.overview}
               </p>
 
-              <div className="flex flex-wrap gap-4">
+              <div className="flex flex-col sm:flex-row flex-wrap gap-4 mt-8">
                 <a 
                   href="https://zivoxtv.live/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-blue-600 hover:bg-blue-500 font-bold text-white shadow-lg shadow-blue-600/30 hover:shadow-blue-600/50 transition-all hover:-translate-y-1"
+                  className="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-blue-600 hover:bg-blue-500 font-bold text-white shadow-lg shadow-blue-600/30 hover:shadow-blue-600/50 transition-all hover:-translate-y-1"
                 >
                   Watch Free on Zivox
                 </a>
                 {trailer && (
-                  <TrailerButton trailerKey={trailer.key} />
+                  <div className="w-full sm:w-auto">
+                    <TrailerButton trailerKey={trailer.key} />
+                  </div>
                 )}
               </div>
             </div>
@@ -121,8 +124,8 @@ export default function MoviePage({ id }: { id: string }) {
 
       {/* Cast Section */}
       {cast.length > 0 && (
-        <div className="max-w-7xl mx-auto px-6 md:px-12 mt-16">
-          <h2 className="text-2xl font-display font-bold text-foreground/90 mb-6">Top Cast</h2>
+        <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 md:px-12 mt-12 md:mt-16">
+          <h2 className="text-xl md:text-2xl font-display font-bold text-foreground/90 mb-6">Top Cast</h2>
           <div className="flex overflow-x-auto gap-4 pb-8 hide-scrollbar snap-x-mandatory">
             {cast.map(actor => (
               <div key={actor.id} className="flex-none w-32 md:w-40 snap-start">
