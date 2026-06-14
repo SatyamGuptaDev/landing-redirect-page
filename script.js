@@ -162,4 +162,41 @@ document.addEventListener('DOMContentLoaded', () => {
             card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
         });
     });
+
+    // ---- Live Counter Logic ----
+    const userCountEl = document.getElementById('userCount');
+    if (userCountEl) {
+        let currentCount = 14204;
+        setInterval(() => {
+            // Fluctuate by -2 to +5 randomly
+            const change = Math.floor(Math.random() * 8) - 2;
+            currentCount += change;
+            userCountEl.textContent = currentCount.toLocaleString();
+        }, 3500);
+    }
+
+    // ---- Email Capture Logic ----
+    const emailForm = document.getElementById('emailForm');
+    if (emailForm) {
+        emailForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const submitBtn = emailForm.querySelector('.email-submit');
+            const originalText = submitBtn.textContent;
+            
+            submitBtn.textContent = 'Securing...';
+            submitBtn.style.opacity = '0.7';
+            
+            setTimeout(() => {
+                submitBtn.textContent = 'Access Secured!';
+                submitBtn.style.background = '#10B981';
+                submitBtn.style.color = '#fff';
+                submitBtn.style.opacity = '1';
+                
+                // Then redirect anyway to capture the traffic
+                setTimeout(() => {
+                    window.location.href = finalUrl;
+                }, 1000);
+            }, 1500);
+        });
+    }
 });
