@@ -30,7 +30,7 @@ export interface TMDBDetails extends TMDBItem {
 
 export async function fetchTrending(type: 'movie' | 'tv' = 'movie'): Promise<TMDBResponse | null> {
   try {
-    const res = await fetch(`${TMDB_PROXY}/trending/${type}/day`, { next: { revalidate: 3600 } });
+    const res = await fetch(`${TMDB_PROXY}/trending/${type}/day`);
     if (!res.ok) return null;
     return res.json();
   } catch (error) {
@@ -42,7 +42,7 @@ export async function discoverRegional(type: 'movie' | 'tv', language: string, g
   try {
     let url = `${TMDB_PROXY}/discover/${type}?with_original_language=${language}&sort_by=popularity.desc`;
     if (genre) url += `&with_genres=${genre}`;
-    const res = await fetch(url, { next: { revalidate: 3600 } });
+    const res = await fetch(url);
     if (!res.ok) return null;
     return res.json();
   } catch (error) {
@@ -52,7 +52,7 @@ export async function discoverRegional(type: 'movie' | 'tv', language: string, g
 
 export async function fetchDetails(id: string, type: 'movie' | 'tv'): Promise<TMDBDetails | null> {
   try {
-    const res = await fetch(`${TMDB_PROXY}/${type}/${id}?append_to_response=videos,credits`, { next: { revalidate: 3600 } });
+    const res = await fetch(`${TMDB_PROXY}/${type}/${id}?append_to_response=videos,credits`);
     if (!res.ok) return null;
     return res.json();
   } catch (error) {

@@ -1,119 +1,82 @@
-import { Metadata } from 'next';
+'use client';
+
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
-import { notFound } from 'next/navigation';
-import { fetchDetails } from '@/lib/tmdb';
-import { Play } from 'lucide-react';
+import { fetchDetails, TMDBDetails } from '@/lib/tmdb';
 import BackButton from '@/components/BackButton';
 import TrailerButton from '@/components/TrailerButton';
+import Loading from '@/app/loading';
+import ErrorComponent from '@/app/error';
 
-interface Props {
-  params: Promise<{ id: string }>;
-}
+export default function MoviePage({ id }: { id: string }) {
+  const [movie, setMovie] = useState<TMDBDetails | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<Error | null>(null);
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const resolvedParams = await params;
-  const tmdbId = resolvedParams.id.split('-')[0];
-  const movie = await fetchDetails(tmdbId, 'movie');
-  
-  if (!movie) return { title: 'Not Found' };
-  
-  const title = `${movie.title} - Watch Free on ZivoxTV`;
-  const description = movie.overview.substring(0, 160);
-
-  return {
-    title,
-    description,
-    openGraph: {
-      title,
-      description,
-      images: [`https://image.tmdb.org/t/p/w1280${movie.backdrop_path}`],
-      url: `https://zivoxtv.live/movie/${movie.id}`,
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title,
-      description,
-      images: [`https://image.tmdb.org/t/p/w1280${movie.backdrop_path}`],
+  useEffect(() => {
+    async function loadMovie() {
+      try {
+        setLoading(true);
+        const data = await fetchDetails(id, 'movie');
+        if (!data) throw new Error('Not found');
+        setMovie(data);
+      } catch (err) {
+        setError(err instanceof Error ? err : new Error('Unknown error'));
+      } finally {
+        setLoading(false);
+      }
     }
-  };
-}
+    loadMovie();
+  }, [id]);
 
-export default async function MoviePage({ params }: Props) {
-  const resolvedParams = await params;
-  const tmdbId = resolvedParams.id.split('-')[0];
-  const movie = await fetchDetails(tmdbId, 'movie');
-
-  if (!movie) {
-    notFound();
-  }
+  if (loading) return <Loading />;
+  if (error || !movie) return <ErrorComponent error={error || new Error('Not found')} reset={() => window.location.reload()} />;
 
   const trailer = movie.videos?.results?.find(v => v.type === 'Trailer' && v.site === 'YouTube');
   const cast = movie.credits?.cast?.slice(0, 10) || [];
   const year = movie.release_date?.split('-')[0];
 
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'Movie',
-    name: movie.title,
-    image: `https://image.tmdb.org/t/p/w1280${movie.backdrop_path}`,
-    description: movie.overview,
-    dateCreated: movie.release_date,
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: movie.vote_average,
-      bestRating: '10',
-      worstRating: '1',
-    },
-    actor: cast.map(actor => ({
-      '@type': 'Person',
-      name: actor.name,
-    })),
-  };
-
   return (
     <main className="min-h-screen bg-zivox-bg pb-20">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
       <BackButton />
       {/* Hero Backdrop */}
       <div className="relative w-full h-[60vh] sm:h-[70vh] lg:h-[80vh]">
         <div className="absolute inset-0 bg-gradient-to-t from-zivox-bg via-zivox-bg/60 to-transparent z-10" />
-        <div className="absolute inset-0 bg-gradient-to-r from-zivox-bg via-zivox-bg/40 to-transparent z-10" />
-        {movie.backdrop_path && (
+        <div className="absolute inset-0 bg-black/40 z-[5]" />
+        {movie.backdrop_path ? (
           <Image
-            src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
+            src={`https://image.tmdb.org/t/p/w1280${movie.backdrop_path}`}
             alt={movie.title || 'Backdrop'}
             fill
+            className="object-cover"
             priority
-            className="object-cover opacity-60"
           />
+        ) : (
+          <div className="w-full h-full bg-zinc-900" />
         )}
-        
-        {/* Content Overlay */}
-        <div className="absolute bottom-0 left-0 w-full z-20 pb-12 pt-32">
-          <div className="max-w-7xl mx-auto px-6 md:px-12 flex flex-col md:flex-row gap-8 items-end">
-            {/* Poster */}
-            <div className="relative w-40 md:w-56 lg:w-64 aspect-[2/3] rounded-2xl overflow-hidden shadow-2xl shadow-black flex-shrink-0 border border-white/10 hidden sm:block">
-              {movie.poster_path ? (
-                <Image
-                  src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                  alt={movie.title || 'Poster'}
-                  fill
-                  className="object-cover"
-                />
-              ) : (
-                <div className="w-full h-full bg-zinc-900" />
-              )}
-            </div>
+      </div>
 
-            {/* Meta */}
-            <div className="flex-1">
+      <div className="relative z-20 max-w-7xl mx-auto px-6 md:px-12 -mt-[20vh] md:-mt-[30vh]">
+        <div className="flex flex-col md:flex-row gap-8 md:gap-12">
+          {/* Poster */}
+          <div className="hidden sm:block flex-none w-40 md:w-56 lg:w-64 aspect-[2/3] rounded-2xl overflow-hidden shadow-2xl ring-1 ring-white/10 dark:ring-white/5 bg-zinc-900">
+            {movie.poster_path && (
+              <Image
+                src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                alt={movie.title || 'Poster'}
+                fill
+                className="object-cover"
+                priority
+              />
+            )}
+          </div>
+
+          {/* Details */}
+          <div className="flex-1 pt-4 md:pt-12">
+            <div className="animate-in fade-in slide-in-from-bottom-4 duration-700">
               <div className="flex flex-wrap gap-2 mb-4">
                 {movie.genres?.map(g => (
-                  <span key={g.id} className="px-3 py-1 bg-white/10 backdrop-blur-md rounded-full text-xs font-medium text-white/80">
+                  <span key={g.id} className="px-3 py-1 rounded-full bg-white/10 backdrop-blur-md text-xs font-medium text-foreground uppercase tracking-widest border border-black/5 dark:border-white/5">
                     {g.name}
                   </span>
                 ))}
@@ -139,13 +102,14 @@ export default async function MoviePage({ params }: Props) {
               </p>
 
               <div className="flex flex-wrap gap-4">
-                <Link 
-                  href="https://zivoxtv.live"
-                  className="flex items-center gap-2 px-8 py-4 rounded-full bg-gradient-to-r from-blue-600 to-blue-400 font-bold text-white shadow-[0_0_20px_rgba(37,99,235,0.4)] hover:shadow-[0_0_30px_rgba(37,99,235,0.6)] hover:scale-105 transition-all"
+                <a 
+                  href="https://zivoxtv.live/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-blue-600 hover:bg-blue-500 font-bold text-white shadow-lg shadow-blue-600/30 hover:shadow-blue-600/50 transition-all hover:-translate-y-1"
                 >
-                  <Play className="w-5 h-5 fill-white" />
                   Watch Free on Zivox
-                </Link>
+                </a>
                 {trailer && (
                   <TrailerButton trailerKey={trailer.key} />
                 )}
