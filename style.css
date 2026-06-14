@@ -226,7 +226,7 @@ h1, h2, h3, h4 {
     z-index: 10;
     width: 100%;
     max-width: 800px;
-    padding: 2rem;
+    padding: 8rem 2rem 2rem 2rem;
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -284,6 +284,10 @@ h1, h2, h3, h4 {
     display: flex;
     align-items: center;
     gap: 1rem;
+}
+
+.nav-actions .live-counter {
+    position: static;
 }
 
 .nav-actions .theme-toggle {
@@ -1006,13 +1010,26 @@ h1, h2, h3, h4 {
 
 /* Mobile Adjustments */
 @media (max-width: 640px) {
+    .sticky-nav {
+        padding: 0.6rem 1rem;
+    }
+    
+    .live-counter {
+        padding: 0.35rem 0.75rem;
+        font-size: 0.8rem;
+    }
+    
+    .live-text {
+        display: none; /* Hide ' streaming now' text to fit header on small screens */
+    }
+    
     .content-wrapper {
-        padding: 1.5rem;
+        padding: 6.5rem 1rem 1.5rem 1rem;
     }
     
     .theme-toggle {
-        top: 1rem;
-        right: 1rem;
+        top: auto;
+        right: auto;
         width: 40px; height: 40px;
     }
 

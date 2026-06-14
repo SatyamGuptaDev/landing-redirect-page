@@ -44,6 +44,46 @@
       "url": "https://zivoxtv.live/"
     }
     </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "name": "Trending Free Movies and TV Shows",
+      "description": "The top trending movies, TV shows, and all-time classics available to stream on ZivoxTV.",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Dune: Part Two"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Deadpool & Wolverine"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Oppenheimer"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "Breaking Bad"
+        },
+        {
+          "@type": "ListItem",
+          "position": 5,
+          "name": "Stranger Things"
+        },
+        {
+          "@type": "ListItem",
+          "position": 6,
+          "name": "The Boys"
+        }
+      ]
+    }
+    </script>
 
     <script defer src="/_vercel/insights/script.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -77,7 +117,7 @@
             <!-- Live Counter -->
             <div class="live-counter interactable">
                 <span class="pulse-dot"></span>
-                <span id="userCount">14,204</span> streaming now
+                <span id="userCount">14,204</span><span class="live-text"> streaming now</span>
             </div>
             <!-- Theme Toggle -->
             <button id="themeToggle" class="theme-toggle interactable" aria-label="Toggle theme">
@@ -147,6 +187,7 @@
     </main>
 
     <section class="seo-text-block fade-in-stagger" style="animation-delay: 0.35s;">
+        <h2 class="sr-only">Why Choose ZivoxTV for Free Movie Streaming</h2>
         <!-- International SEO (Invisible to users, readable by bots) -->
         <div class="sr-only">
             Ver películas gratis online, assistir filmes online dublado gratis, streaming de series gratuit, hindi free HD movies streaming online, watch free movies streaming no sign up.
@@ -171,6 +212,7 @@
     </section>
 
     <section class="fade-in-stagger reviews-section" style="animation-delay: 0.4s;">
+        <h2 class="sr-only">ZivoxTV User Reviews and Testimonials</h2>
         <div class="reviews-grid">
             <div class="review-card tilt-card">
                 <div class="review-stars">★★★★★</div>
@@ -215,6 +257,7 @@
     
     <!-- Mega SEO Content Section -->
     <section class="seo-content-block fade-in-stagger" style="animation-delay: 0.45s;">
+        <h2 class="sr-only">Explore Top Movie and TV Genres on ZivoxTV</h2>
         <div class="seo-grid">
             <div class="seo-card">
                 <h3>Action & Adventure</h3>
@@ -239,7 +282,6 @@
         </div>
     </section>
     
-        
         <div class="final-cta fade-in-stagger" style="animation-delay: 0.5s;">
             <h2 class="hero-title" style="font-size: clamp(2rem, 5vw, 4rem);">Ready for the ultimate cinema experience?</h2>
             <button id="redirectBtnBottom" class="primary-btn interactable glow-btn large-btn">
@@ -247,18 +289,7 @@
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
             </button>
         </div>
-
-        <div class="email-capture-section fade-in-stagger" style="animation-delay: 0.6s;">
-            <div class="email-capture-card">
-                <h3>Never lose your favorite streams.</h3>
-                <p>Enter your email to get our new secret links if we ever move domains again. No spam, just uninterrupted cinema.</p>
-                <form id="emailForm" class="email-form">
-                    <input type="email" placeholder="Enter your best email" required class="email-input interactable">
-                    <button type="submit" class="email-submit interactable glow-btn">Stay Connected</button>
-                </form>
-            </div>
-        </div>
-    </section>
+    </main>
 
     <script src="script.js"></script>
 </body>

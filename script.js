@@ -292,28 +292,4 @@ document.addEventListener('DOMContentLoaded', () => {
         setInterval(updateCounter, 5000);
     }
 
-    // ---- Email Capture Logic ----
-    const emailForm = document.getElementById('emailForm');
-    if (emailForm) {
-        emailForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const submitBtn = emailForm.querySelector('.email-submit');
-            const originalText = submitBtn.textContent;
-            
-            submitBtn.textContent = 'Securing...';
-            submitBtn.style.opacity = '0.7';
-            
-            setTimeout(() => {
-                submitBtn.textContent = 'Access Secured!';
-                submitBtn.style.background = '#10B981';
-                submitBtn.style.color = '#fff';
-                submitBtn.style.opacity = '1';
-                
-                // Then redirect anyway to capture the traffic
-                setTimeout(() => {
-                    window.location.href = finalUrl;
-                }, 1000);
-            }, 1500);
-        });
-    }
 });
