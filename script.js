@@ -1,49 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // ---- Theme Toggle Logic ----
-    const themeToggle = document.getElementById('themeToggle');
-    const iconSun = document.querySelector('.icon-sun');
-    const iconMoon = document.querySelector('.icon-moon');
-    
-    // Check local storage or system preference
-    let savedTheme = localStorage.getItem('zivox-theme');
-    
-    // Default to light if no saved theme
-    if (!savedTheme) {
-        savedTheme = 'light';
-        localStorage.setItem('zivox-theme', 'light');
-    }
-    
-    if (savedTheme === 'light') {
-        document.documentElement.setAttribute('data-theme', 'light');
-        iconSun.classList.add('hidden');
-        iconMoon.classList.remove('hidden');
-    } else {
-        document.documentElement.setAttribute('data-theme', 'dark');
-        iconMoon.classList.add('hidden');
-        iconSun.classList.remove('hidden');
-    }
-
-    themeToggle.addEventListener('click', () => {
-        const currentTheme = document.documentElement.getAttribute('data-theme');
-        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-        
-        document.documentElement.setAttribute('data-theme', newTheme);
-        localStorage.setItem('zivox-theme', newTheme);
-        
-        // Rotate animation on SVG for a cool effect
-        themeToggle.querySelector('svg:not(.hidden)').style.transform = 'rotate(180deg)';
-        
-        setTimeout(() => {
-            if (newTheme === 'light') {
-                iconSun.classList.add('hidden');
-                iconMoon.classList.remove('hidden');
-            } else {
-                iconMoon.classList.add('hidden');
-                iconSun.classList.remove('hidden');
-            }
-            themeToggle.querySelectorAll('svg').forEach(svg => svg.style.transform = 'rotate(0deg)');
-        }, 150);
-    });
 
     // ---- Smooth Interactive Mouse Logic ----
     const cursorDot = document.getElementById('cursor-dot');
