@@ -22,6 +22,31 @@
     <meta property="twitter:description" content="Welcome to ZivoxTV. Watch the latest blockbuster movies and hit TV series. Find the best streaming destination for trending entertainment right here.">
     <meta property="twitter:image" content="https://zivoxtv.live/og-image.jpg">
 
+    <!-- JSON-LD SEO Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "ZivoxTV",
+      "url": "https://zivoxtv.live/",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://zivoxtv.live/search?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      },
+      "description": "Stream the best classic movies and top-rated television shows free online. High-definition streaming for cinematic masterpieces."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      "name": "Watch Free Movies & TV Shows",
+      "description": "A curated collection of free trending movies, latest TV shows, and all-time classics.",
+      "url": "https://zivoxtv.live/"
+    }
+    </script>
+
     <script defer src="/_vercel/insights/script.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -72,18 +97,18 @@
         </div>
 
         <div class="fade-in-stagger" style="animation-delay: 0.1s;">
-            <h1 class="hero-title">The Next Evolution<br>of Streaming.</h1>
+            <h1 class="hero-title gradient-animate">Your Free Streaming<br>Era Begins.</h1>
         </div>
 
         <div class="fade-in-stagger" style="animation-delay: 0.2s;">
             <p class="hero-subtitle">
-                We have permanently moved to a new home.<br class="desktop-break"> 
-                Save our new domain to continue your premium cinematic experience.
+                Zivox has evolved. The cinematic universe is now ad-free, uninterrupted, and better than ever.<br class="desktop-break"> 
+                Unlock your premium pass to infinite entertainment below.
             </p>
         </div>
 
         <div class="fade-in-stagger action-group" style="animation-delay: 0.3s;">
-            <div class="domain-pill interactable">
+            <div class="domain-pill interactable tilt-card">
                 <div class="domain-text">
                     <span class="dim">https://</span>zivoxtv.live
                 </div>
@@ -94,15 +119,31 @@
                 </button>
             </div>
 
-            <button id="redirectBtn" class="primary-btn interactable">
-                <span>Enter ZivoxTV</span>
+            <button id="redirectBtn" class="primary-btn interactable glow-btn">
+                <span>Enter ZivoxTV Now</span>
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
             </button>
         </div>
     </main>
 
     <section class="seo-text-block fade-in-stagger" style="animation-delay: 0.35s;">
-        <p><strong>Watch Free Movies Online:</strong> Discover the ultimate destination to stream full movies free and watch TV shows online free. Whether you want to watch classic movies, top trending shows, or search for "movies free to watch online", ZivoxTV provides a premium cinematic experience. Don't pay for subscriptions when you can watch free online here.</p>
+        <div class="features-grid">
+            <div class="feature-card tilt-card">
+                <div class="feature-icon">🎬</div>
+                <h3>Watch Free Movies Online</h3>
+                <p>Discover the ultimate destination to stream full movies free. No subscriptions, just cinematic masterpieces at your fingertips.</p>
+            </div>
+            <div class="feature-card tilt-card">
+                <div class="feature-icon">📺</div>
+                <h3>Watch TV Shows Online Free</h3>
+                <p>Binge-watch top trending series in high definition. We curate the latest TV shows so you never miss an episode.</p>
+            </div>
+            <div class="feature-card tilt-card">
+                <div class="feature-icon">⚡</div>
+                <h3>Zero Buffering, 4K Quality</h3>
+                <p>Stop searching for "movies free to watch online" and settling for bad quality. Experience premium, ad-free streaming.</p>
+            </div>
+        </div>
     </section>
 
     <section class="fade-in-stagger trending-section" style="animation-delay: 0.4s;">
@@ -298,6 +339,14 @@
                     <div class="trending-pill">Doctor Who</div>
                 </div>
             </div>
+        </div>
+        
+        <div class="final-cta fade-in-stagger" style="animation-delay: 0.6s;">
+            <h2>Ready for the ultimate cinema experience?</h2>
+            <button id="redirectBtnBottom" class="primary-btn interactable glow-btn large-btn">
+                <span>Claim Your Free Access</span>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </button>
         </div>
     </section>
 
